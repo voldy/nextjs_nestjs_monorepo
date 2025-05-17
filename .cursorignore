@@ -1,0 +1,11 @@
+
+# Ignore (i.e. do not block edits) on non-sensitive files (for example, .env.example, .gitignore, .prettierrc, .eslintrc, etc.)
+!.env.example
+!.gitignore
+!.prettierrc
+!.eslintrc.json
+!.lintstagedrc
+
+# Ignore (block edits) on sensitive files (e.g. .env, .secret, etc.) 
+.env
+.secret

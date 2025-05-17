@@ -93,6 +93,10 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 [Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
+## Environment & Configuration Management
+
+This monorepo uses dotenv (and a shared utility (packages/shared/env.ts) with zod) for environment validation. A template (.env.example) is provided (with placeholder values) so that you can copy it (for example, to a local .env) and fill in your own values. (See packages/shared/env.ts for the zod schema and exported (typed) Env object.)
+
 ## Useful links
 
 Learn more:
