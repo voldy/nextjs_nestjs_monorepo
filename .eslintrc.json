@@ -1,15 +1,32 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": [],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "extends": [
-    "plugin:@nx/typescript/recommended",
-    "plugin:prettier/recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@next/next/recommended",
+    "prettier"
   ],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./tsconfig.base.json"]
+  },
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
-  ]
+  },
+  "rules": {
+    "prettier/prettier": "warn"
+  }
 }

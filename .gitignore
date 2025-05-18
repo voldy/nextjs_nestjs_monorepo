@@ -40,3 +40,12 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+# Next.js
+.next
+out
+
+test-output
+
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
