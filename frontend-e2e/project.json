@@ -1,0 +1,14 @@
+{
+  "name": "frontend-e2e",
+  "projectType": "application",
+  "sourceRoot": "frontend-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "frontend-e2e/playwright.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

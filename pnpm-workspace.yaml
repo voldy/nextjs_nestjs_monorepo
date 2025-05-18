@@ -1,9 +1,12 @@
 packages:
-  - 'packages/*'
-  - 'frontend'
+  - packages/*
+  - frontend
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
-  - 'esbuild'
-  - 'nx'
-  - 'sharp'
+  - esbuild
+  - nx
+  - sharp
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - msw

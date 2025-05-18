@@ -21,25 +21,21 @@
       "@/*": ["./src/*"]
     },
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "../frontend/.next/types/**/*.ts",
-    "../dist/frontend/.next/types/**/*.ts",
-    "next-env.d.ts"
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "src/**/*",
+    "../dist/frontend/.next/types/**/*.ts"
   ],
   "exclude": [
-    "out-tsc",
-    "dist",
     "node_modules",
+    "../dist",
+    ".next/cache",
     "jest.config.ts",
     "src/**/*.spec.ts",
-    "src/**/*.test.ts",
-    ".next"
+    "src/**/*.test.ts"
   ]
 }

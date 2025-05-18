@@ -2,9 +2,7 @@
   "name": "@nextjs_nestjs_monorepo/frontend-e2e",
   "version": "0.0.1",
   "private": true,
-  "nx": {
-    "implicitDependencies": [
-      "@nextjs_nestjs_monorepo/frontend"
-    ]
+  "dependencies": {
+    "@playwright/test": "^1.49.0"
   }
 }
