@@ -1,5 +1,5 @@
 {
-  "name": "@nextjs_nestjs_monorepo/frontend-e2e",
+  "name": "@monorepo/frontend-e2e",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
