@@ -1,35 +1,46 @@
 {
   "name": "frontend",
-  "projectType": "application",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "frontend/src",
+  "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/frontend"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "frontend"
+        },
+        "production": {}
       }
     },
     "serve": {
       "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "frontend:build",
-        "dev": true
+        "dev": true,
+        "turbo": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend:build:development",
+          "dev": true,
+          "turbo": true
+        },
+        "production": {
+          "buildTarget": "frontend:build:production",
+          "dev": false
+        }
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["frontend/**/*.{js,ts,jsx,tsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["coverage/frontend"],
-      "options": {
-        "jestConfig": "frontend/jest.config.js",
-        "passWithNoTests": true
-      }
+      "outputs": ["{options.outputFile}"]
     }
   },
   "tags": []
