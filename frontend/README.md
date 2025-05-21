@@ -59,6 +59,19 @@ pnpm shadcn-ui add button
 
 ---
 
+## Testing
+
+This project uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit and integration tests.
+
+- To run all tests:
+  ```sh
+  pnpm test
+  ```
+- Sample tests can be found in `src/app/__tests__/`.
+- Write tests for your components and pages to ensure reliability and prevent regressions.
+
+---
+
 ## Useful Links
 
 - [shadcn/ui Documentation](https://ui.shadcn.com/docs)

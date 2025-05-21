@@ -33,7 +33,13 @@ export default function RootLayout({
           <div className="fixed top-4 right-4 z-50">
             <ThemeSwitch />
           </div>
-          {children}
+          <header className="mb-8 flex w-full items-center justify-between border-b px-8 py-4">
+            <span className="text-lg font-bold">My App</span>
+          </header>
+          <main>{children}</main>
+          <footer className="text-muted-foreground mt-8 w-full border-t px-8 py-4 text-center text-xs">
+            &copy; {new Date().getFullYear()} My App. All rights reserved.
+          </footer>
         </ThemeProvider>
       </body>
     </html>
