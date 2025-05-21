@@ -20,8 +20,6 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": {
-      "@/components/*": ["apps/frontend/src/components/*"]
-    }
+    "paths": {}
   }
 }
