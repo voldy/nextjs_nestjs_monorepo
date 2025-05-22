@@ -8,6 +8,7 @@ ignoredBuiltDependencies:
   - nx
   - sharp
 onlyBuiltDependencies:
+  - '@nestjs/core'
   - '@tailwindcss/oxide'
   - msw
   - sharp

@@ -20,8 +20,9 @@ export default tseslintConfig(
       '**/.git/**',
       // Config files that shouldn't be type-checked
       '**/jest.config.js',
+      '**/jest.config.ts',
       '**/next.config.mjs',
-      '**/*.config.{js,mjs}',
+      '**/*.config.{js,mjs,ts}',
     ],
   },
 
@@ -53,7 +54,12 @@ export default tseslintConfig(
     languageOptions: {
       parser: (await import('@typescript-eslint/parser')).default,
       parserOptions: {
-        project: ['./frontend/tsconfig.json', './backend/tsconfig.json'],
+        project: [
+          './frontend/tsconfig.json',
+          './backend/tsconfig.json',
+          './packages/shared/tsconfig.json',
+          './frontend-e2e/tsconfig.json',
+        ],
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -117,6 +123,16 @@ export default tseslintConfig(
   // Backend specific files
   {
     files: ['backend/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
+  // Frontend E2E specific files (Playwright)
+  {
+    files: ['frontend-e2e/**/*.{js,ts}'],
     languageOptions: {
       globals: {
         ...globals.node,

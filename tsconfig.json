@@ -8,6 +8,9 @@
     },
     {
       "path": "./frontend-e2e"
+    },
+    {
+      "path": "./packages/shared"
     }
   ]
 }
