@@ -65,7 +65,7 @@ This is a modern monorepo powered by [Nx](https://nx.dev) and [pnpm](https://pnp
 
 - [Nx Documentation](https://nx.dev)
 - [shadcn/ui Documentation](https://ui.shadcn.com/docs)
-- - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Playwright (e2e)](https://playwright.dev/)
 - [Lucide Icons](https://lucide.dev/icons/)

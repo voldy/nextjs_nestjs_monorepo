@@ -75,7 +75,7 @@ This project uses [Jest](https://jestjs.io/) and [React Testing Library](https:/
 ## Useful Links
 
 - [shadcn/ui Documentation](https://ui.shadcn.com/docs)
-- - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Monorepo Root README](../README.md)
 - [Lucide Icons](https://lucide.dev/icons/)

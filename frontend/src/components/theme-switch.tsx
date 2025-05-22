@@ -1,24 +1,20 @@
-'use client';
+'use client'
 
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from './theme-provider';
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from './theme-provider'
 
 export function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme()
 
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="inline-flex items-center gap-2 px-2 py-1 border rounded bg-background text-foreground hover:bg-muted transition-colors"
+      className="bg-background text-foreground hover:bg-muted inline-flex items-center gap-2 rounded border px-2 py-1 transition-colors"
       aria-label="Toggle theme"
       type="button"
     >
-      {theme === 'dark' ? (
-        <Sun className="w-4 h-4" />
-      ) : (
-        <Moon className="w-4 h-4" />
-      )}
+      {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
       <span className="sr-only">Toggle theme</span>
     </button>
-  );
+  )
 }
