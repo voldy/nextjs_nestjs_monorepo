@@ -14,6 +14,7 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 - **Testing**: Jest with React Testing Library (frontend) and NestJS testing utilities (backend)
 - **Build**: SWC for fast compilation on both frontend and backend
 - **Formatting**: Prettier with automatic formatting
+- **Nx Plugins**: @nx/next (frontend), @nx/nest (backend), @nx/playwright (E2E)
 
 ---
 
@@ -66,13 +67,13 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
    pnpm dev
 
    # Or start individually
-   pnpm dev:frontend    # Frontend on http://localhost:3000
+   pnpm dev:frontend    # Frontend on http://localhost:4200
    pnpm dev:backend     # Backend on http://localhost:3000
    ```
 
 3. **Open your browser:**
-   - Frontend: [http://localhost:3000](http://localhost:3000)
-   - Backend API: [http://localhost:3000](http://localhost:3000) (when running separately)
+   - Frontend: [http://localhost:4200](http://localhost:4200)
+   - Backend API: [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -194,6 +195,30 @@ pnpm shadcn add card
 ```
 
 Components are automatically installed to `frontend/src/components/ui/`.
+
+---
+
+## 🏗️ Backend Code Generation
+
+The backend uses the `@nx/nest` plugin for generating NestJS components:
+
+```bash
+# Generate components
+pnpm exec nx g @nx/nest:controller users --project=backend
+pnpm exec nx g @nx/nest:service users --project=backend
+pnpm exec nx g @nx/nest:module users --project=backend
+
+# Generate complete resources (with CRUD operations)
+pnpm exec nx g @nx/nest:resource users --project=backend
+
+# Other available generators
+pnpm exec nx g @nx/nest:guard auth --project=backend
+pnpm exec nx g @nx/nest:interceptor logging --project=backend
+pnpm exec nx g @nx/nest:pipe validation --project=backend
+pnpm exec nx g @nx/nest:filter exception --project=backend
+```
+
+All generators automatically follow NestJS conventions and integrate with the Nx workspace.
 
 ---
 

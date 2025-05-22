@@ -13,6 +13,8 @@ This is the NestJS 11 backend API server for the monorepo. It provides a robust,
 - **Testing**: Jest with NestJS testing utilities and Supertest
 - **HTTP Framework**: Express.js (configurable)
 - **Linting**: ESLint 9+ with Node.js and TypeScript rules
+- **Monorepo Integration**: Nx workspace with `@nx/nest` plugin for code generation
+- **Package Management**: Dependencies managed at workspace root level
 
 ---
 
@@ -94,25 +96,35 @@ backend/
 
 ### Adding New Endpoints
 
-1. **Generate a new controller:**
+#### Using Nx Generators (Recommended)
 
-   ```bash
-   cd backend
-   nest generate controller users
-   ```
+The recommended approach is to use Nx generators with the `@nx/nest` plugin from the workspace root:
 
-2. **Generate a new service:**
+```bash
+# Generate a complete resource with CRUD operations
+pnpm exec nx g @nx/nest:resource users --project=backend
 
-   ```bash
-   cd backend
-   nest generate service users
-   ```
+# Generate individual components
+pnpm exec nx g @nx/nest:controller users --project=backend
+pnpm exec nx g @nx/nest:service users --project=backend
+pnpm exec nx g @nx/nest:module users --project=backend
 
-3. **Generate a complete module:**
-   ```bash
-   cd backend
-   nest generate module users
-   ```
+# Generate other NestJS components
+pnpm exec nx g @nx/nest:guard auth --project=backend
+pnpm exec nx g @nx/nest:interceptor logging --project=backend
+pnpm exec nx g @nx/nest:pipe validation --project=backend
+```
+
+#### Using NestJS CLI (Alternative)
+
+You can also use the NestJS CLI directly:
+
+```bash
+cd backend
+nest generate controller users
+nest generate service users
+nest generate module users
+```
 
 ---
 
