@@ -12,6 +12,10 @@
     "isolatedModules": true,
     "lib": ["dom", "esnext"],
     "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "plugins": [
       {
         "name": "next"
@@ -24,8 +28,9 @@
     "**/*.ts",
     "**/*.tsx",
     "../types/**/*.d.ts",
+    ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    "../dist/frontend/.next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

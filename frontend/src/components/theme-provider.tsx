@@ -4,7 +4,7 @@ import * as React from 'react'
 
 type ThemeContextType = {
   theme: 'light' | 'dark'
-  // eslint-disable-next-line no-unused-vars
+
   setTheme: (theme: 'light' | 'dark') => void
 }
 

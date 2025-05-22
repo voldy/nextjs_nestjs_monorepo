@@ -8,13 +8,81 @@ import globals from 'globals'
  * Flat config for Nx monorepo: supports TypeScript, React, Prettier, and project structure.
  */
 export default tseslintConfig(
+  // Base configuration with ignores
   {
-    // Remove ignores array block entirely
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/.next/**',
+      '**/coverage/**',
+      '**/pnpm-lock.yaml',
+      '**/.git/**',
+      // Config files that shouldn't be type-checked
+      '**/jest.config.js',
+      '**/next.config.mjs',
+      '**/*.config.{js,mjs}',
+    ],
   },
+
+  // Base ESLint config for all files
   eslint.configs.recommended,
+
+  // Prettier config for all files
   eslintPluginPrettierRecommended,
-  // React support
+
+  // JavaScript files - minimal configuration without TypeScript parser
   {
+    files: ['**/*.{js,jsx,mjs}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
+    },
+    rules: {
+      'prettier/prettier': 'warn',
+    },
+  },
+
+  // TypeScript files - use TypeScript ESLint parser and rules
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: (await import('@typescript-eslint/parser')).default,
+      parserOptions: {
+        project: ['./frontend/tsconfig.json', './backend/tsconfig.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': (await import('@typescript-eslint/eslint-plugin')).default,
+    },
+    rules: {
+      // Base TypeScript rules
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-floating-promises': 'warn',
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+      // Prefer TypeScript version over base ESLint
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          args: 'none',
+        },
+      ],
+      'prettier/prettier': 'warn',
+    },
+  },
+
+  // React/JSX files (TypeScript and JavaScript)
+  {
+    files: ['**/*.{jsx,tsx}'],
     plugins: {
       react: (await import('eslint-plugin-react')).default,
       'react-hooks': (await import('eslint-plugin-react-hooks')).default,
@@ -37,63 +105,40 @@ export default tseslintConfig(
       'react/prop-types': 'off',
     },
   },
-  // Next.js and Testing Library support
+
+  // Next.js specific files
   {
+    files: ['frontend/**/*.{js,jsx,ts,tsx}'],
     plugins: {
       next: (await import('@next/eslint-plugin-next')).default,
+    },
+  },
+
+  // Backend specific files
+  {
+    files: ['backend/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+
+  // Test files
+  {
+    files: [
+      '**/*.test.{ts,tsx,js,jsx}',
+      '**/__tests__/**/*.{ts,tsx,js,jsx}',
+      '**/*.spec.{ts,tsx,js,jsx}',
+      '**/test/**/*.{ts,tsx,js,jsx}',
+    ],
+    plugins: {
       'testing-library': (await import('eslint-plugin-testing-library')).default,
     },
-    languageOptions: {
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-      },
-    },
-    rules: {
-      // Only register plugins, do not spread rules from plugin configs to avoid undefined errors
-    },
-  },
-  // Register @typescript-eslint plugin for custom rules
-  {
-    plugins: {
-      '@typescript-eslint': (await import('@typescript-eslint/eslint-plugin')).default,
-    },
-  },
-  // Type-aware parser options for custom rules
-  {
-    languageOptions: {
-      parser: (await import('@typescript-eslint/parser')).default,
-      parserOptions: {
-        project: ['./frontend/tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
-        // Exclude build artifacts from type-aware linting
-        exclude: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.next/**', '**/coverage/**'],
-      },
-    },
-  },
-  // Jest globals for test files - FIXED
-  {
-    files: ['**/*.test.{ts,tsx,js,jsx}', '**/__tests__/**/*.{ts,tsx,js,jsx}', '**/*.spec.{ts,tsx,js,jsx}'],
     languageOptions: {
       globals: {
         ...globals.jest,
       },
-    },
-  },
-  // Custom rules
-  {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
-      'prettier/prettier': 'warn',
     },
   },
 )

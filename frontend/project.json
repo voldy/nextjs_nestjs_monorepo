@@ -39,11 +39,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["src/**/*.{ts,tsx,js,jsx}"],
-        "noIgnore": true
+        "command": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+        "cwd": "frontend"
       }
     }
   },
