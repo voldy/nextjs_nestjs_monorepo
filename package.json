@@ -7,8 +7,8 @@
     "prepare": "husky",
     "test": "nx run-many -t test",
     "build": "nx run-many -t build",
-    "dev": "nx run-many -t start:dev",
-    "dev:frontend": "nx dev frontend",
+    "dev": "nx run-many -t serve,start:dev --parallel --output-style=stream",
+    "dev:frontend": "nx serve frontend",
     "dev:backend": "nx start:dev backend"
   },
   "private": true,
