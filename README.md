@@ -1,16 +1,17 @@
 # Next.js + NestJS Monorepo
 
-A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://pnpm.io/), featuring a Next.js frontend and NestJS backend with shared tooling and optimized development experience.
+A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://pnpm.io/), featuring a Next.js frontend, NestJS backend, and a shared utilities library with optimized development experience.
 
 ---
 
 ## 🚀 Tech Stack
 
 - **Frontend**: Next.js 15, React 19, Tailwind CSS, shadcn/ui
-- **Backend**: NestJS 11, Node.js, TypeScript
+- **Backend**: NestJS 11, Node.js, TypeScript, Fastify
+- **Shared Package**: TypeScript utilities library with environment validation (Zod)
 - **Monorepo**: Nx 21.x for task orchestration and caching
 - **Package Manager**: pnpm for fast, efficient dependency management
-- **Linting**: ESLint 9+ with flat config, TypeScript-aware rules
+- **Linting**: ESLint 9+ with flat config, TypeScript-aware rules, projectService
 - **Testing**: Jest with React Testing Library (frontend) and NestJS testing utilities (backend)
 - **Build**: SWC for fast compilation on both frontend and backend
 - **Formatting**: Prettier with automatic formatting
@@ -36,12 +37,86 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 │   ├── test/          # End-to-end tests
 │   ├── project.json   # Nx project configuration
 │   └── README.md
+├── packages/
+│   └── shared/        # Shared utilities library
+│       ├── src/
+│       │   ├── index.ts       # Main exports
+│       │   ├── env.ts         # Environment validation (Zod)
+│       │   └── lib/           # Utility functions
+│       ├── project.json       # Nx project configuration
+│       └── README.md
 ├── frontend-e2e/      # Playwright end-to-end tests
 ├── nx.json            # Nx workspace configuration
-├── eslint.config.mjs  # ESLint flat config for both projects
+├── eslint.config.mjs  # ESLint flat config for all projects
 ├── tsconfig.base.json # Base TypeScript configuration
 └── package.json       # Root workspace configuration
 ```
+
+---
+
+## 📦 Shared Package
+
+The monorepo includes a shared utilities library (`@shared`) that provides:
+
+- **Environment validation** with Zod schema validation
+- **Cross-platform utilities** (browser detection, logging, etc.)
+- **Type-safe imports** across frontend and backend
+- **Hot reloading** in development mode
+
+### Usage Example
+
+```typescript
+// In frontend (Next.js) or backend (NestJS)
+import { Env, logger, isBrowser, deepMerge } from '@shared'
+
+// Environment variables (validated with Zod)
+console.log(`Running on port: ${Env.PORT}`)
+console.log(`Environment: ${Env.NODE_ENV}`)
+
+// Cross-platform utilities
+if (isBrowser()) {
+  logger.log('Running in browser')
+} else {
+  logger.log('Running on server')
+}
+
+// Deep object merging
+const merged = deepMerge(defaultConfig, userConfig)
+```
+
+See [`packages/shared/README.md`](packages/shared/README.md) for detailed documentation.
+
+---
+
+## ⚙️ Configuration & Tooling
+
+### TypeScript Configuration
+
+- **Base config**: `tsconfig.base.json` with modern `moduleResolution: "NodeNext"`
+- **Project references**: Proper TypeScript project references for fast builds
+- **Path mapping**: `@shared` imports work across all projects
+- **Extensionless imports**: Clean import syntax without `.js`/`.ts` extensions
+
+### ESLint Configuration
+
+- **Flat config**: Modern ESLint 9+ configuration in `eslint.config.mjs`
+- **ProjectService**: Automatic TypeScript project discovery (`projectService: true`)
+- **Project references support**: Works with complex monorepo TypeScript setups
+- **Consistent rules**: Same linting rules across frontend, backend, and shared package
+
+### Jest Testing
+
+- **Shared package support**: Jest configured to resolve `@shared` imports
+- **Module mapping**: Automatic `.js` to `.ts` resolution for testing
+- **Cross-project testing**: Tests work seamlessly across all packages
+- **Fast execution**: Optimized Jest configuration for monorepo testing
+
+### Build System
+
+- **SWC compilation**: Fast TypeScript compilation for both development and production
+- **Nx caching**: Intelligent task caching and dependency tracking
+- **Hot reloading**: Shared package changes reflect immediately in dependent projects
+- **Production builds**: Optimized builds with proper module resolution
 
 ---
 

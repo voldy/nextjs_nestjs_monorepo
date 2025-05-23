@@ -15,6 +15,7 @@ This is the NestJS 11 backend API server for the monorepo. It provides a robust,
 - **Linting**: ESLint 9+ with Node.js and TypeScript rules
 - **Monorepo Integration**: Nx workspace with `@nx/nest` plugin for code generation
 - **Package Management**: Dependencies managed at workspace root level
+- **Shared Utilities**: `@shared` package for cross-platform utilities and environment validation
 
 ---
 
@@ -419,3 +420,49 @@ import { Injectable } from '@nestjs/common'
 - **Follow module boundaries** for maintainable architecture
 - **Use environment variables** for configuration
 - **Leverage dependency injection** for testable code
+
+---
+
+## 📦 Shared Package Integration
+
+The backend integrates with the monorepo's shared utilities library (`@shared`) for:
+
+### Environment Configuration
+
+```typescript
+import { Env } from '@shared'
+
+// Validated environment variables (using Zod)
+const port = Env.PORT // Type-safe, validated
+const nodeEnv = Env.NODE_ENV // 'development' | 'test' | 'production'
+const databaseUrl = Env.DATABASE_URL // Validated URL format
+```
+
+### Utilities and Logging
+
+```typescript
+import { logger, deepMerge, sleep } from '@shared'
+
+// Structured logging
+logger.log('Server starting', { port: Env.PORT })
+logger.warn('High memory usage detected')
+logger.error('Database connection failed', error)
+
+// Other utilities
+const config = deepMerge(defaultConfig, userConfig)
+await sleep(1000) // Promise-based delay
+```
+
+### Cross-Platform Compatibility
+
+```typescript
+import { isBrowser } from '@shared'
+
+// Always returns false in Node.js backend
+if (!isBrowser()) {
+  // Server-side only code
+  console.log('Running on server')
+}
+```
+
+**Note**: The shared package provides type-safe, validated utilities that work seamlessly across the frontend and backend without requiring separate implementations.

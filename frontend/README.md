@@ -14,6 +14,7 @@ This is the Next.js 15 frontend application for the monorepo. It uses React 19, 
 - **Testing**: Jest + React Testing Library + JSDOM
 - **Build**: SWC for fast compilation
 - **Linting**: ESLint 9+ with React/Next.js rules
+- **Shared Utilities**: `@shared` package for cross-platform utilities and environment validation
 
 ---
 
@@ -271,3 +272,70 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 - Use path aliases (`@/`) for cleaner imports
 - Follow the [Next.js App Router patterns](https://nextjs.org/docs/app) for routing
 - Utilize React 19 features like Server Components and Actions
+
+## 📦 Shared Package Integration
+
+The frontend integrates with the monorepo's shared utilities library (`@shared`) for:
+
+### Environment Configuration
+
+```typescript
+import { Env } from '@shared'
+
+// Validated environment variables (works in Server Components)
+console.log(`API Port: ${Env.PORT}`)
+console.log(`Environment: ${Env.NODE_ENV}`)
+```
+
+### Browser Detection
+
+```typescript
+import { isBrowser } from '@shared'
+
+// Client vs Server logic
+if (isBrowser()) {
+  // Client-side only code
+  document.title = 'My App'
+  localStorage.setItem('key', 'value')
+} else {
+  // Server-side rendering code
+  console.log('Rendering on server')
+}
+```
+
+### Utilities and Logging
+
+```typescript
+import { logger, deepMerge, sleep } from '@shared'
+
+// Cross-platform logging
+logger.log('Component mounted')
+logger.warn('API deprecated', { version: '1.0' })
+
+// Utility functions
+const mergedConfig = deepMerge(defaultConfig, userConfig)
+await sleep(1000) // Promise-based delay
+```
+
+### Usage in Components
+
+```typescript
+'use client' // For client components using React hooks
+
+import { useEffect } from 'react'
+import { logger, isBrowser } from '@shared'
+
+export default function MyComponent() {
+  useEffect(() => {
+    if (isBrowser()) {
+      logger.log('Client component mounted')
+    }
+  }, [])
+
+  return <div>My Component</div>
+}
+```
+
+**Note**: Server Components can use shared utilities directly, while Client Components need the `'use client'` directive for React hooks.
+
+---
