@@ -6,8 +6,8 @@
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2023"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -24,8 +24,8 @@
       "@/*": ["frontend/src/*"],
       "@/backend/*": ["backend/src/*"],
       "@/frontend/*": ["frontend/src/*"],
-      "@shared": ["packages/shared/dist/src/index.js"],
-      "@shared/*": ["packages/shared/dist/src/*"]
+      "@shared": ["packages/shared/src/index.ts"],
+      "@shared/*": ["packages/shared/src/*"]
     }
   }
 }

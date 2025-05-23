@@ -54,12 +54,7 @@ export default tseslintConfig(
     languageOptions: {
       parser: (await import('@typescript-eslint/parser')).default,
       parserOptions: {
-        project: [
-          './frontend/tsconfig.json',
-          './backend/tsconfig.json',
-          './packages/shared/tsconfig.json',
-          './frontend-e2e/tsconfig.json',
-        ],
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
