@@ -15,8 +15,12 @@ describe('AppController', () => {
   })
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!')
+    it('should return an object with message', () => {
+      const result = appController.getHello()
+      expect(result).toHaveProperty('message', 'Hello from NestJS Backend! 🚀')
+      expect(result).toHaveProperty('environment')
+      expect(result).toHaveProperty('port')
+      expect(result).toHaveProperty('timestamp')
     })
   })
 })
