@@ -22,13 +22,13 @@ src/
 Import utilities using the configured path alias:
 
 ```ts
-import { isBrowser, sleep, assertUnreachable, logger, deepMerge } from '@/shared'
+import { isBrowser, sleep, assertUnreachable, logger, deepMerge } from '@shared'
 ```
 
 ### 🌍 Environment Configuration
 
 ```ts
-import { Env } from '@/shared'
+import { Env } from '@shared'
 
 // Automatically validates environment variables on import
 console.log(`Running on port: ${Env.PORT}`)
@@ -39,7 +39,7 @@ console.log(`Database: ${Env.DATABASE_URL}`)
 ### 🔍 Browser Detection
 
 ```ts
-import { isBrowser } from '@/shared'
+import { isBrowser } from '@shared'
 
 if (isBrowser()) {
   // This code only runs in the browser
@@ -54,7 +54,7 @@ if (isBrowser()) {
 ### ⏰ Sleep Utility
 
 ```ts
-import { sleep } from '@/shared'
+import { sleep } from '@shared'
 
 async function example() {
   console.log('Starting...')
@@ -66,7 +66,7 @@ async function example() {
 ### 🔒 Exhaustive Type Checking
 
 ```ts
-import { assertUnreachable } from '@/shared'
+import { assertUnreachable } from '@shared'
 
 type Status = 'loading' | 'success' | 'error'
 
@@ -89,7 +89,7 @@ function getStatusMessage(status: Status): string {
 ### 📝 Simple Logging
 
 ```ts
-import { logger } from '@/shared'
+import { logger } from '@shared'
 
 logger.log('User logged in', { userId: 123 })
 logger.warn('API rate limit approaching', { remaining: 5 })
@@ -99,7 +99,7 @@ logger.error('Database connection failed', error)
 ### 🔀 Deep Object Merging
 
 ```ts
-import { deepMerge } from '@/shared'
+import { deepMerge } from '@shared'
 
 const defaultConfig = {
   api: { timeout: 5000, retries: 3 },

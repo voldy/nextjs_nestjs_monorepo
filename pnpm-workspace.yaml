@@ -1,6 +1,7 @@
 packages:
   - packages/*
   - frontend
+  - backend
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'

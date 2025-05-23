@@ -2,12 +2,16 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
-    "emitDeclarationOnly": false,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["node", "jest"]
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "jest.config.ts"],
-  "exclude": []
+  "include": ["src/**/*.ts"],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

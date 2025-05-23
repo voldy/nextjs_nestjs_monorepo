@@ -22,9 +22,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["frontend/src/*"],
+      "@/backend/*": ["backend/src/*"],
       "@/frontend/*": ["frontend/src/*"],
-      "@/shared/*": ["packages/shared/src/*"],
-      "@/backend/*": ["backend/src/*"]
+      "@shared": ["packages/shared/dist/src/index.js"],
+      "@shared/*": ["packages/shared/dist/src/*"]
     }
   }
 }

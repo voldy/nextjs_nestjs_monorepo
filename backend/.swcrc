@@ -1,0 +1,33 @@
+{
+  "exclude": "node_modules/",
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true,
+      "topLevelAwait": true
+    },
+    "target": "es2023",
+    "baseUrl": ".",
+    "experimental": {
+      "plugins": [
+        [
+          "@swc/plugin-transform-imports",
+          {
+            "^(.*?)(\\.ts)$": {
+              "skipDefaultConversion": true,
+              "transform": "{{matches.[1]}}.js"
+            }
+          }
+        ]
+      ]
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    }
+  },
+  "module": {
+    "type": "es6",
+    "strict": true
+  }
+}

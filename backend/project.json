@@ -6,41 +6,48 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nest build -b swc",
+        "command": "swc src --out-dir dist --copy-files && tsc-alias -p tsconfig.json",
         "cwd": "backend"
       },
       "configurations": {
         "production": {
-          "command": "nest build --webpack=false -b swc",
+          "command": "swc src --out-dir dist --copy-files && tsc-alias -p tsconfig.json",
           "cwd": "backend"
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": ["shared"]
+        }
+      ]
     },
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nest start -b swc",
+        "command": "node dist/main.js",
         "cwd": "backend"
-      }
+      },
+      "dependsOn": ["build"]
     },
     "start:dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nest start --watch -b swc",
+        "command": "tsx --env-file=../.env src/main.ts",
         "cwd": "backend"
       }
     },
     "start:debug": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nest start --debug --watch -b swc",
+        "command": "tsx --inspect --env-file=../.env src/main.ts",
         "cwd": "backend"
       }
     },
     "start:prod": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node dist/main",
+        "command": "node dist/main.js",
         "cwd": "backend"
       },
       "dependsOn": ["build"]

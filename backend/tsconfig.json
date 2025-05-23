@@ -1,41 +1,49 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    // Base configuration
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "target": "ES2022",
-    "lib": ["es2022"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "lib": ["ES2022"],
     "allowSyntheticDefaultImports": true,
-
-    // NestJS specific
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": false,
     "declaration": true,
-    "removeComments": true,
+    "removeComments": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "..",
     "incremental": true,
-
-    // Strict type checking (matching root)
-    "strict": true,
+    "skipLibCheck": true,
     "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "strict": true,
     "noImplicitOverride": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
-
-    // Other useful options
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-
-    // Paths (empty for now, can add backend-specific aliases later)
-    "paths": {}
+    "isolatedModules": true,
+    "useDefineForClassFields": false,
+    "paths": {
+      "@shared": ["packages/shared/src/index.ts"],
+      "@shared/*": ["packages/shared/src/*"]
+    }
   },
-  "include": ["src/**/*", "test/**/*", "jest.config.js"],
-  "exclude": ["node_modules", "dist"]
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*", "test/**/*", "jest.config.cjs"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    {
+      "path": "../packages/shared"
+    }
+  ]
 }
