@@ -1,4 +1,4 @@
-import { deepMerge } from './deepMerge'
+import { deepMerge } from './deepMerge.ts'
 
 describe('deepMerge', () => {
   it('should merge simple objects', () => {

@@ -1,4 +1,4 @@
-import { isBrowser } from './isBrowser'
+import { isBrowser } from './isBrowser.ts'
 
 describe('isBrowser', () => {
   it('should return false in Node.js environment', () => {

@@ -1,4 +1,4 @@
-import { shared } from './shared'
+import { shared } from './shared.ts'
 
 describe('shared', () => {
   it('should work', () => {

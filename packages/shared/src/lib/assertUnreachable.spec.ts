@@ -1,4 +1,4 @@
-import { assertUnreachable } from './assertUnreachable'
+import { assertUnreachable } from './assertUnreachable.ts'
 
 describe('assertUnreachable', () => {
   it('should throw an error with the provided value', () => {
