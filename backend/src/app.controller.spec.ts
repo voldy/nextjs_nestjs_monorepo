@@ -23,4 +23,18 @@ describe('AppController', () => {
       expect(result).toHaveProperty('timestamp')
     })
   })
+
+  describe('health', () => {
+    it('should return health check information', () => {
+      const result = appController.getHealth() as any
+      expect(result).toHaveProperty('status', 'ok')
+      expect(result).toHaveProperty('timestamp')
+      expect(result).toHaveProperty('uptime')
+      expect(result).toHaveProperty('environment')
+      expect(result).toHaveProperty('version')
+      expect(result).toHaveProperty('memory')
+      expect(result.memory).toHaveProperty('used')
+      expect(result.memory).toHaveProperty('total')
+    })
+  })
 })

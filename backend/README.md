@@ -466,3 +466,71 @@ if (!isBrowser()) {
 ```
 
 **Note**: The shared package provides type-safe, validated utilities that work seamlessly across the frontend and backend without requiring separate implementations.
+
+---
+
+## 🔒 Security Configuration
+
+### CORS Settings
+
+CORS (Cross-Origin Resource Sharing) is configured in `src/config/security.config.ts` and **must be updated** for production deployments.
+
+#### Current Development Configuration
+
+```typescript
+origin: [
+  'http://localhost:4200', // Next.js frontend (development)
+  /^http:\/\/localhost:\d+$/, // Any localhost port for development
+],
+credentials: true,
+methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+```
+
+#### Production Configuration Examples
+
+**Single Domain:**
+
+```typescript
+origin: ['https://myapp.com'],
+credentials: true,
+```
+
+**Multiple Domains:**
+
+```typescript
+origin: [
+  'https://myapp.com',
+  'https://www.myapp.com',
+  'https://admin.myapp.com',
+],
+credentials: true,
+```
+
+**Environment-Based:**
+
+```typescript
+origin: process.env.NODE_ENV === 'production'
+  ? ['https://myapp.com']
+  : [/^http:\/\/localhost:\d+$/],
+credentials: true,
+```
+
+#### Security Headers (Helmet)
+
+Content Security Policy and other security headers are also configured in `security.config.ts`. Update CSP directives based on your frontend requirements:
+
+```typescript
+contentSecurityPolicy: {
+  directives: {
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'", "'unsafe-inline'"], // Needed for CSS-in-JS
+    scriptSrc: ["'self'"],
+    imgSrc: ["'self'", 'data:', 'https:'],
+    // Add more directives as needed
+  },
+}
+```
+
+**⚠️ Important**: Always restrict CORS origins in production to prevent unauthorized access from malicious websites.
+
+---

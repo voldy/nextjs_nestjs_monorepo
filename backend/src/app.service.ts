@@ -13,4 +13,20 @@ export class AppService {
       timestamp: new Date().toISOString(),
     }
   }
+
+  getHealth(): object {
+    logger.log('Health check endpoint called')
+
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: Env.NODE_ENV,
+      version: process.version,
+      memory: {
+        used: Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100,
+        total: Math.round((process.memoryUsage().heapTotal / 1024 / 1024) * 100) / 100,
+      },
+    }
+  }
 }
