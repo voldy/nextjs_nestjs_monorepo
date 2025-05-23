@@ -8,6 +8,9 @@ import { cn } from '@/lib/utils'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Switch } from '@/components/ui/switch'
 
+// Import from shared package
+import { logger, Env, isBrowser } from '@shared'
+
 const notifications = [
   {
     title: 'Your call has been confirmed.',
@@ -63,10 +66,30 @@ export function CardDemo({ className, ...props }: CardProps) {
 }
 
 export default function Home() {
+  // Test shared package integration in Server Component
+  logger.log('Environment:', Env.NODE_ENV)
+
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
         <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
+
+        {/* Display shared package integration results */}
+        <div className="bg-card text-card-foreground rounded-lg border p-6 shadow-sm">
+          <h3 className="mb-2 text-lg font-semibold">Shared Package Integration Test</h3>
+          <div className="space-y-2 text-sm">
+            <p>
+              <strong>Environment:</strong> {Env.NODE_ENV}
+            </p>
+            <p>
+              <strong>Port:</strong> {Env.PORT}
+            </p>
+            <p>
+              <strong>Is SSR:</strong> {(!isBrowser()).toString()}
+            </p>
+          </div>
+        </div>
+
         <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm/6 sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{' '}

@@ -1,12 +1,12 @@
 // Environment configuration
-export * from './env.js'
+export * from './env.ts'
 
 // Utility functions
-export * from './lib/shared.js'
+export * from './lib/shared.ts'
 
 // Additional shared utilities
-export * from './lib/isBrowser.js'
-export * from './lib/sleep.js'
-export * from './lib/assertUnreachable.js'
-export * from './lib/logger.js'
-export * from './lib/deepMerge.js'
+export * from './lib/isBrowser.ts'
+export * from './lib/sleep.ts'
+export * from './lib/assertUnreachable.ts'
+export * from './lib/logger.ts'
+export * from './lib/deepMerge.ts'
