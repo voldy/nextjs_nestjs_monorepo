@@ -11,7 +11,8 @@ import { PingButton } from '@/components/ping-button'
 import { HealthStatus } from '@/components/health-status'
 
 // Import from shared package
-import { logger, Env, isBrowser } from '@shared'
+import { logger, isBrowser } from '@shared'
+import { FrontendEnv } from '../env.js'
 
 const notifications = [
   {
@@ -69,7 +70,7 @@ export function CardDemo({ className, ...props }: CardProps) {
 
 export default function Home() {
   // Test shared package integration in Server Component
-  logger.log('Environment:', Env.NODE_ENV)
+  logger.log('Environment:', FrontendEnv.NODE_ENV)
 
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
@@ -81,10 +82,10 @@ export default function Home() {
           <h3 className="mb-2 text-lg font-semibold">Shared Package Integration Test</h3>
           <div className="space-y-2 text-sm">
             <p>
-              <strong>Environment:</strong> {Env.NODE_ENV}
+              <strong>Environment:</strong> {FrontendEnv.NODE_ENV}
             </p>
             <p>
-              <strong>Backend URL:</strong> {Env.BACKEND_URL}
+              <strong>API URL:</strong> {FrontendEnv.API_URL}
             </p>
             <p>
               <strong>Is SSR:</strong> {(!isBrowser()).toString()}
@@ -96,8 +97,11 @@ export default function Home() {
         <div className="bg-card text-card-foreground w-full max-w-4xl rounded-lg border p-6 shadow-sm">
           <h3 className="mb-4 text-lg font-semibold">tRPC API Integration</h3>
           <p className="text-muted-foreground mb-6 text-sm">
-            End-to-end type-safe API calls using <code className="bg-muted rounded px-1">AppRouter</code> types from the
-            shared package.
+            End-to-end type-safe API calls using{' '}
+            <code className="bg-muted rounded px-1 py-0.5 font-[family-name:var(--font-geist-mono)] font-semibold dark:bg-white/[.06]">
+              AppRouter
+            </code>{' '}
+            types from the shared package.
           </p>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

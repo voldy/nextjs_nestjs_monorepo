@@ -4,6 +4,30 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 
 ---
 
+## 🆕 **Recent Architecture Improvements**
+
+### ✅ **Environment Variable Management**
+
+- **Clean Separation**: Frontend, backend, and shared environment variables properly separated
+- **Type Safety**: All environment variables validated with Zod schemas
+- **Smart Defaults**: Automatic API URL detection for different environments (dev/prod)
+- **Deployment Ready**: Separate configurations for different deployment targets
+
+### ✅ **Testing Architecture**
+
+- **Factory-Based Testing**: Dynamic test data generation using Fishery factories
+- **Integration Testing**: Factory consistency validation across contexts
+- **Simplified Dependencies**: Removed complex HTTP mocking for faster, more reliable tests
+- **Jest Globals**: Proper ESLint configuration for Jest testing environment
+
+### ✅ **Type-Safe API Communication**
+
+- **tRPC Integration**: End-to-end type safety between frontend and backend
+- **Shared Types**: Common API types in shared package for consistency
+- **Real-time Updates**: tRPC hooks with React Query for optimal UX
+
+---
+
 ## 🚀 Tech Stack
 
 - **Frontend**: Next.js 15, React 19, Tailwind CSS, shadcn/ui
@@ -21,36 +45,34 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 
 ## 📁 Project Structure
 
-```
-├── frontend/          # Next.js 15 application
-│   ├── src/
-│   │   ├── app/       # App Router (Next.js 15)
-│   │   ├── components/ # Reusable components (shadcn/ui)
-│   │   └── lib/       # Utilities and helpers
-│   ├── project.json   # Nx project configuration
-│   └── README.md
-├── backend/           # NestJS 11 API server
-│   ├── src/
-│   │   ├── app.module.ts
-│   │   ├── app.controller.ts
-│   │   └── main.ts
-│   ├── test/          # End-to-end tests
-│   ├── project.json   # Nx project configuration
-│   └── README.md
+├── frontend/ # Next.js 15 application
+│ ├── src/
+│ │ ├── app/ # App Router (Next.js 15)
+│ │ ├── components/ # Reusable components (shadcn/ui)
+│ │ └── lib/ # Utilities and helpers
+│ ├── project.json # Nx project configuration
+│ └── README.md
+├── backend/ # NestJS 11 API server
+│ ├── src/
+│ │ ├── app.module.ts
+│ │ ├── app.controller.ts
+│ │ └── main.ts
+│ ├── test/ # End-to-end tests
+│ ├── project.json # Nx project configuration
+│ └── README.md
 ├── packages/
-│   └── shared/        # Shared utilities library
-│       ├── src/
-│       │   ├── index.ts       # Main exports
-│       │   ├── env.ts         # Environment validation (Zod)
-│       │   └── lib/           # Utility functions
-│       ├── project.json       # Nx project configuration
-│       └── README.md
-├── frontend-e2e/      # Playwright end-to-end tests
-├── nx.json            # Nx workspace configuration
-├── eslint.config.mjs  # ESLint flat config for all projects
+│ └── shared/ # Shared utilities library
+│ ├── src/
+│ │ ├── index.ts # Main exports
+│ │ ├── env.ts # Environment validation (Zod)
+│ │ └── lib/ # Utility functions
+│ ├── project.json # Nx project configuration
+│ └── README.md
+├── frontend-e2e/ # Playwright end-to-end tests
+├── nx.json # Nx workspace configuration
+├── eslint.config.mjs # ESLint flat config for all projects
 ├── tsconfig.base.json # Base TypeScript configuration
-└── package.json       # Root workspace configuration
-```
+└── package.json # Root workspace configuration
 
 ---
 
@@ -65,7 +87,7 @@ The monorepo includes a shared utilities library (`@shared`) that provides:
 
 ### Usage Example
 
-```typescript
+````typescript
 // In frontend (Next.js) or backend (NestJS)
 import { Env, logger, isBrowser, deepMerge } from '@shared'
 
@@ -82,7 +104,6 @@ if (isBrowser()) {
 
 // Deep object merging
 const merged = deepMerge(defaultConfig, userConfig)
-```
 
 See [`packages/shared/README.md`](packages/shared/README.md) for detailed documentation.
 
@@ -133,7 +154,7 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 
    ```bash
    pnpm install
-   ```
+````
 
 2. **Start development servers:**
 
@@ -156,12 +177,11 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 
 ### Monorepo Scripts
 
-```bash
+````bash
 pnpm dev              # Start both apps in development mode
 pnpm build            # Build both apps for production
 pnpm test             # Run tests for all projects
 pnpm lint             # Lint all projects with ESLint
-```
 
 ### Individual Project Scripts
 
@@ -178,7 +198,6 @@ nx build backend      # Build backend for production
 nx test backend       # Run backend tests
 nx lint backend       # Lint backend code
 nx start backend      # Start built backend in production mode
-```
 
 ---
 
@@ -198,7 +217,6 @@ nx graph
 
 # Reset Nx cache
 nx reset
-```
 
 ### Code Quality
 
@@ -212,9 +230,36 @@ nx reset
 
 ## 🧪 Testing
 
-- **Frontend**: Jest + React Testing Library + JSDOM
+### Testing Strategy
+
+- **Frontend**: Jest + React Testing Library + Factory-based test data
 - **Backend**: Jest + NestJS testing utilities + Supertest
+- **Integration**: Factory consistency validation across contexts
 - **E2E**: Playwright for end-to-end testing
+
+### Factory-Based Testing
+
+Our testing uses dynamic factories for realistic, consistent test data:
+
+```typescript
+// Generate test data dynamically
+const healthData = factories.healthCheck.success()
+const customHealth = factories.healthCheck.withCustomMemory(512, 1024)
+const prodHealth = factories.healthCheck.production()
+
+// Same factories work across unit and integration tests
+mockUseApi.mockReturnValue({
+  data: factories.healthCheck.success(),
+  isLoading: false,
+  error: null,
+  execute: jest.fn(),
+})
+
+### Environment-Specific Testing
+
+- **Frontend**: Uses `frontend/src/env.ts` for frontend-specific variables
+- **Backend**: Uses `backend/src/env.ts` for backend-specific variables
+- **Shared**: Uses `packages/shared/src/env.ts` for truly shared variables
 
 ```bash
 # Run all tests
@@ -226,7 +271,11 @@ nx test backend --coverage
 
 # Run E2E tests
 nx e2e frontend-e2e
-```
+
+# Run integration tests specifically
+nx test frontend --testPathPattern=integration
+
+See [`frontend/src/test-utils/integration-test-example.md`](frontend/src/test-utils/integration-test-example.md) for detailed testing documentation.
 
 ---
 
@@ -242,7 +291,24 @@ nx build backend --configuration=production
 
 # Start production server (backend)
 nx start:prod backend
-```
+
+### Environment Variables
+
+Each part of the monorepo has its own environment configuration:
+
+```bash
+# Frontend environment (.env or deployment config)
+NEXT_PUBLIC_API_URL=https://api.yourdomain.com
+NEXT_PUBLIC_FEATURE_TRPC=true
+NEXT_PUBLIC_DEBUG=false
+
+# Backend environment (.env or deployment config)
+DATABASE_URL=postgresql://user:pass@localhost:5432/db
+PORT=3000
+CORS_ORIGINS=https://yourdomain.com,https://app.yourdomain.com
+
+# Shared environment (automatically detected)
+NODE_ENV=production
 
 ---
 
@@ -255,7 +321,6 @@ pnpm add -w <package>
 # Add to specific project
 pnpm add <package> --filter frontend
 pnpm add <package> --filter backend
-```
 
 ---
 
@@ -267,7 +332,6 @@ The frontend uses [shadcn/ui](https://ui.shadcn.com/docs) for reusable, accessib
 # Add a new component
 pnpm shadcn add button
 pnpm shadcn add card
-```
 
 Components are automatically installed to `frontend/src/components/ui/`.
 
@@ -291,7 +355,6 @@ pnpm exec nx g @nx/nest:guard auth --project=backend
 pnpm exec nx g @nx/nest:interceptor logging --project=backend
 pnpm exec nx g @nx/nest:pipe validation --project=backend
 pnpm exec nx g @nx/nest:filter exception --project=backend
-```
 
 All generators automatically follow NestJS conventions and integrate with the Nx workspace.
 
@@ -336,3 +399,4 @@ Please update relevant READMEs if you change project structure or conventions.
 - **pnpm** for efficient dependency management
 - **Next.js** optimizations (Image, Font, Bundle optimization)
 - **Incremental builds** and smart task execution
+````

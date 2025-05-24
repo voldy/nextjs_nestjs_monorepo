@@ -1,8 +1,10 @@
 import 'reflect-metadata'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
-import { AppModule } from './app.module.ts'
-import { Env, logger } from '@shared'
+import { AppModule } from './app.module.js'
+import { HttpStatus, ValidationPipe } from '@nestjs/common'
+import { BackendEnv } from './env.js'
+import { logger } from '@shared'
 import { configureSecurity } from './config/security.config.ts'
 
 async function bootstrap() {
@@ -14,11 +16,22 @@ async function bootstrap() {
   // Global prefix for all routes
   app.setGlobalPrefix('api', { exclude: ['/health'] })
 
-  await app.listen(Env.BACKEND_PORT, '0.0.0.0')
+  // Global validation pipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      transform: true,
+      dismissDefaultMessages: false,
+    }),
+  )
 
-  logger.log(`🚀 Backend server is running on ${Env.BACKEND_URL}`)
+  const port = BackendEnv.PORT
+  await app.listen(port)
+
+  logger.log(`🚀 Backend server is running on: ${BackendEnv.BACKEND_URL}`)
   logger.log(`⚡ Using Fastify for high performance`)
-  logger.log(`🌍 Environment: ${Env.NODE_ENV}`)
+  logger.log(`🌍 Environment: ${BackendEnv.NODE_ENV}`)
+  logger.log(`🗄️ Database: ${BackendEnv.DATABASE_URL.split('@')[1] || 'configured'}`) // Hide credentials
   logger.log(`🔒 CORS enabled for frontend origins`)
   logger.log(`🛡️  Security headers enabled with Helmet`)
 }

@@ -28,4 +28,5 @@ module.exports = {
     ],
   },
   transformIgnorePatterns: ['node_modules/(?!(.pnpm/)?(@trpc|@tanstack|@testing-library|superjson))'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
 }

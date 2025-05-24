@@ -142,6 +142,8 @@ export default tseslintConfig(
       '**/__tests__/**/*.{ts,tsx,js,jsx}',
       '**/*.spec.{ts,tsx,js,jsx}',
       '**/test/**/*.{ts,tsx,js,jsx}',
+      '**/test-utils/**/*.{ts,tsx,js,jsx}',
+      '**/*{.,-}test{.,-}*.{ts,tsx,js,jsx}',
     ],
     plugins: {
       'testing-library': (await import('eslint-plugin-testing-library')).default,
@@ -149,6 +151,17 @@ export default tseslintConfig(
     languageOptions: {
       globals: {
         ...globals.jest,
+        // Explicitly define Jest globals to ensure they're recognized
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        beforeEach: 'readonly',
+        afterAll: 'readonly',
+        afterEach: 'readonly',
+        jest: 'readonly',
+        fetch: 'readonly',
       },
     },
   },
