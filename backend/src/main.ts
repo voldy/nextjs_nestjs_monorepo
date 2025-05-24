@@ -14,9 +14,9 @@ async function bootstrap() {
   // Global prefix for all routes
   app.setGlobalPrefix('api', { exclude: ['/health'] })
 
-  await app.listen(Env.PORT, '0.0.0.0')
+  await app.listen(Env.BACKEND_PORT, '0.0.0.0')
 
-  logger.log(`🚀 Backend server is running on http://localhost:${Env.PORT}`)
+  logger.log(`🚀 Backend server is running on ${Env.BACKEND_URL}`)
   logger.log(`⚡ Using Fastify for high performance`)
   logger.log(`🌍 Environment: ${Env.NODE_ENV}`)
   logger.log(`🔒 CORS enabled for frontend origins`)

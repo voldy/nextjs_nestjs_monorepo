@@ -7,6 +7,8 @@ import { BellRing, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Switch } from '@/components/ui/switch'
+import { PingButton } from '@/components/ping-button'
+import { HealthStatus } from '@/components/health-status'
 
 // Import from shared package
 import { logger, Env, isBrowser } from '@shared'
@@ -82,11 +84,34 @@ export default function Home() {
               <strong>Environment:</strong> {Env.NODE_ENV}
             </p>
             <p>
-              <strong>Port:</strong> {Env.PORT}
+              <strong>Backend URL:</strong> {Env.BACKEND_URL}
             </p>
             <p>
               <strong>Is SSR:</strong> {(!isBrowser()).toString()}
             </p>
+          </div>
+        </div>
+
+        {/* tRPC API Demo */}
+        <div className="bg-card text-card-foreground w-full max-w-4xl rounded-lg border p-6 shadow-sm">
+          <h3 className="mb-4 text-lg font-semibold">tRPC API Integration</h3>
+          <p className="text-muted-foreground mb-6 text-sm">
+            End-to-end type-safe API calls using <code className="bg-muted rounded px-1">AppRouter</code> types from the
+            shared package.
+          </p>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* Health Status */}
+            <div className="flex flex-col items-center">
+              <h4 className="text-md mb-4 font-medium">Health Check</h4>
+              <HealthStatus />
+            </div>
+
+            {/* Ping Test */}
+            <div className="flex flex-col items-center">
+              <h4 className="text-md mb-4 font-medium">Ping Test</h4>
+              <PingButton />
+            </div>
           </div>
         </div>
 
@@ -113,7 +138,6 @@ export default function Home() {
             <Image className="dark:invert" src="/vercel.svg" alt="Vercel logomark" width={20} height={20} />
             Deploy now
           </a>
-          <Button variant="destructive">Undeploy</Button>
           <a
             className="flex h-10 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
