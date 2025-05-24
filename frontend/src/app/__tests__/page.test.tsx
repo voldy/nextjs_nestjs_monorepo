@@ -74,7 +74,27 @@ describe('Home page', () => {
   })
 
   describe('Health Check States', () => {
-    it('shows health data with generated factory data', async () => {
+    it('shows health data with factory-generated data', async () => {
+      // Generate health data with specific uptime
+      const healthData = factories.healthCheck.success()
+      const expectedMinutes = Math.floor(healthData.uptime / 60)
+      const expectedSeconds = healthData.uptime % 60
+
+      mockUseApi.mockReturnValue({
+        data: healthData,
+        isLoading: false,
+        error: null,
+        refetch: jest.fn(),
+        execute: jest.fn(),
+      })
+
+      renderWithProviders(<Home />)
+
+      // Wait for health data to load and check uptime display
+      await screen.findByText(`${expectedMinutes}m ${expectedSeconds}s`)
+    })
+
+    it('shows health data with custom memory values', async () => {
       // Generate custom health data using factory
       const customHealth = factories.healthCheck.withCustomMemory(256, 1024)
 
@@ -90,23 +110,6 @@ describe('Home page', () => {
 
       // Should show the custom memory values from factory
       await screen.findByText('256MB / 1024MB')
-    })
-
-    it('shows production environment from factory', async () => {
-      const prodHealth = factories.healthCheck.production()
-
-      mockUseApi.mockReturnValue({
-        data: prodHealth,
-        isLoading: false,
-        error: null,
-        refetch: jest.fn(),
-        execute: jest.fn(),
-      })
-
-      renderWithProviders(<Home />)
-
-      // Wait for health data to load and check environment
-      await screen.findByText('production')
     })
 
     it('shows error state when API fails', async () => {

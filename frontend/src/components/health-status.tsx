@@ -3,11 +3,18 @@
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import type { AppRouter } from '@shared'
 import { useApi } from '@/hooks/use-api'
 
-// Type-safe using AppRouter
-type HealthCheckOutput = Awaited<ReturnType<AppRouter['health']['check']>>
+// Type for the actual REST /health endpoint response
+type HealthCheckResponse = {
+  status: string
+  timestamp: string
+  uptime: number
+  memory: {
+    used: number
+    total: number
+  }
+}
 
 export function HealthStatus() {
   const {
@@ -16,7 +23,7 @@ export function HealthStatus() {
     error,
     execute,
     refetch,
-  } = useApi<HealthCheckOutput>('/health', {
+  } = useApi<HealthCheckResponse>('/health', {
     retry: 3,
     retryDelay: 1000,
     cache: true,
@@ -57,10 +64,6 @@ export function HealthStatus() {
               <span className="font-medium text-green-600">{health.status}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Environment:</span>
-              <span className="font-medium">{health.environment}</span>
-            </div>
-            <div className="flex justify-between">
               <span className="text-muted-foreground">Uptime:</span>
               <span className="font-medium">
                 {Math.floor(health.uptime / 60)}m {health.uptime % 60}s
@@ -71,10 +74,6 @@ export function HealthStatus() {
               <span className="font-medium">
                 {health.memory.used}MB / {health.memory.total}MB
               </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Node:</span>
-              <span className="font-medium">{health.version}</span>
             </div>
             <div className="text-muted-foreground text-xs">
               Last checked: {new Date(health.timestamp).toLocaleTimeString()}

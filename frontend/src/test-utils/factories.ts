@@ -1,28 +1,24 @@
 import { Factory } from 'fishery'
 
-// Health Check Response Factory
+// Health Check Response Factory (matches actual REST /health endpoint)
 export interface HealthCheckResponse {
   status: 'ok' | 'error'
   timestamp: string
   uptime: number
-  environment: 'development' | 'production' | 'test'
   memory: {
     used: number
     total: number
   }
-  version: string
 }
 
 export const healthCheckFactory = Factory.define<HealthCheckResponse>(({ sequence }) => ({
   status: 'ok',
   timestamp: new Date().toISOString(),
   uptime: sequence * 1000 + 12345,
-  environment: 'development',
   memory: {
     used: 128 + sequence * 10,
     total: 512,
   },
-  version: 'v18.0.0',
 }))
 
 // Ping Response Factory
@@ -67,7 +63,6 @@ export const factories = {
   healthCheck: {
     success: () => healthCheckFactory.build(),
     withCustomMemory: (used: number, total: number) => healthCheckFactory.build({ memory: { used, total } }),
-    production: () => healthCheckFactory.build({ environment: 'production' }),
   },
 
   // Ping scenarios

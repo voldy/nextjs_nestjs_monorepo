@@ -13,54 +13,40 @@ describe('Factory Integration Tests', () => {
       const health1 = factories.healthCheck.success()
       const health2 = factories.healthCheck.success()
 
-      // Both should have same structure but different dynamic values
+      // Same structure and types
       expect(health1.status).toBe('ok')
       expect(health2.status).toBe('ok')
-      expect(health1.environment).toBe('development')
-      expect(health2.environment).toBe('development')
 
       // But different dynamic values
       expect(health1.uptime).not.toBe(health2.uptime)
       expect(health1.memory.used).not.toBe(health2.memory.used)
-      expect(health1.timestamp).not.toBe(health2.timestamp)
+
+      // Proper types
+      expect(typeof health1.timestamp).toBe('string')
+      expect(typeof health1.uptime).toBe('number')
+      expect(health1.memory).toHaveProperty('used')
+      expect(health1.memory).toHaveProperty('total')
     })
 
-    it('should support custom factory parameters', () => {
+    it('should allow custom memory values', () => {
       const customHealth = factories.healthCheck.withCustomMemory(512, 1024)
 
-      expect(customHealth.memory).toEqual({
-        used: 512,
-        total: 1024,
-      })
+      expect(customHealth.memory.used).toBe(512)
+      expect(customHealth.memory.total).toBe(1024)
       expect(customHealth.status).toBe('ok')
-    })
-
-    it('should generate production environment', () => {
-      const prodHealth = factories.healthCheck.production()
-
-      expect(prodHealth.environment).toBe('production')
-      expect(prodHealth.status).toBe('ok')
     })
   })
 
   describe('Ping Factory', () => {
-    it('should generate ping data with default delay', () => {
-      const ping = factories.ping.success()
+    it('should generate consistent ping data', () => {
+      const ping1 = factories.ping.success()
+      const ping2 = factories.ping.success(1000)
 
-      expect(ping).toMatchObject({
-        message: 'Pong! 🏓',
-        delay: 500,
-        pong: true,
-        timestamp: expect.any(String),
-      })
-    })
-
-    it('should generate ping data with custom delay', () => {
-      const ping = factories.ping.success(2000)
-
-      expect(ping.delay).toBe(2000)
-      expect(ping.message).toBe('Pong! 🏓')
-      expect(ping.pong).toBe(true)
+      expect(ping1.pong).toBe(true)
+      expect(ping2.pong).toBe(true)
+      expect(ping1.delay).toBe(500) // Default
+      expect(ping2.delay).toBe(1000) // Custom
+      expect(ping1.message).toBe('Pong! 🏓')
     })
 
     it('should generate realistic timestamps', () => {
@@ -96,20 +82,18 @@ describe('Factory Integration Tests', () => {
       // Structure validation (same as unit tests expect)
       expect(healthData).toMatchObject({
         status: 'ok',
-        environment: 'development',
         memory: {
           used: expect.any(Number),
           total: expect.any(Number),
         },
-        version: expect.any(String),
-        uptime: expect.any(Number),
         timestamp: expect.any(String),
+        uptime: expect.any(Number),
       })
 
       expect(pingData).toMatchObject({
-        message: 'Pong! 🏓',
-        delay: 1500,
         pong: true,
+        delay: 1500,
+        message: 'Pong! 🏓',
         timestamp: expect.any(String),
       })
     })
@@ -134,36 +118,29 @@ describe('Factory Integration Tests', () => {
     })
   })
 
-  describe('Factory Performance', () => {
-    it('should generate many factory instances quickly', () => {
+  describe('Performance & Reliability', () => {
+    it('should generate many objects quickly', () => {
       const start = Date.now()
 
-      // Generate 100 instances
-      const healths = Array.from({ length: 100 }, () => factories.healthCheck.success())
-      const pings = Array.from({ length: 100 }, () => factories.ping.success())
+      const healthChecks = Array.from({ length: 100 }, () => factories.healthCheck.success())
 
-      const duration = Date.now() - start
+      const end = Date.now()
 
-      // Should be fast (less than 100ms for 200 objects)
-      expect(duration).toBeLessThan(100)
+      expect(healthChecks).toHaveLength(100)
+      expect(end - start).toBeLessThan(100) // Should be very fast
 
-      // Health data should have some uniqueness (uptime varies)
-      const healthUptimes = healths.map((h) => h.uptime)
-      const uniqueUptimes = [...new Set(healthUptimes)]
-      expect(uniqueUptimes.length).toBeGreaterThan(10) // Some uniqueness expected
+      // All should be unique
+      const uptimes = healthChecks.map((h) => h.uptime)
+      const uniqueUptimes = new Set(uptimes)
+      expect(uniqueUptimes.size).toBe(100)
+    })
 
-      // All should have valid structure
-      healths.forEach((health) => {
-        expect(health.status).toBe('ok')
-        expect(health.memory.used).toBeGreaterThan(0)
-        expect(health.uptime).toBeGreaterThan(0)
-      })
+    it('should handle edge cases gracefully', () => {
+      const edgeCase = factories.healthCheck.withCustomMemory(0, 0)
 
-      pings.forEach((ping) => {
-        expect(ping.message).toBe('Pong! 🏓')
-        expect(ping.delay).toBe(500)
-        expect(ping.pong).toBe(true)
-      })
+      expect(edgeCase.memory.used).toBe(0)
+      expect(edgeCase.memory.total).toBe(0)
+      expect(edgeCase.status).toBe('ok')
     })
   })
 })

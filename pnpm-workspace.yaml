@@ -1,20 +1,12 @@
-# Define the workspace structure for the PNPM monorepo
-
 packages:
-  # Frontend Next.js app
-  - 'frontend'
-  # Backend NestJS app
-  - 'backend'
-  # Shared utilities package
-  - 'packages/*'
-
-# Dependencies that should be ignored during hoisting
-# This helps avoid version conflicts in a monorepo
-
+  - frontend
+  - backend
+  - packages/*
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
   - esbuild
+  - msw
   - nx
   - sharp
 onlyBuiltDependencies:
