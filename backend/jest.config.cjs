@@ -30,5 +30,5 @@ module.exports = {
     '^@shared$': '<rootDir>/../../packages/shared/src/index.ts',
     '^@shared/(.*)$': '<rootDir>/../../packages/shared/src/$1',
   },
-  transformIgnorePatterns: ['node_modules/(?!(.*\\.mjs$))'],
+  transformIgnorePatterns: ['node_modules/(?!(.pnpm/)?(@trpc|@tanstack|superjson))'],
 }

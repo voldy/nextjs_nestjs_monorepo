@@ -25,16 +25,22 @@ describe('AppController', () => {
   })
 
   describe('health', () => {
-    it('should return health check information', () => {
-      const result = appController.getHealth() as any
+    it('should return health check information', async () => {
+      const result = await appController.simpleHealthCheck()
       expect(result).toHaveProperty('status', 'ok')
       expect(result).toHaveProperty('timestamp')
       expect(result).toHaveProperty('uptime')
-      expect(result).toHaveProperty('environment')
-      expect(result).toHaveProperty('version')
       expect(result).toHaveProperty('memory')
       expect(result.memory).toHaveProperty('used')
       expect(result.memory).toHaveProperty('total')
+    })
+  })
+
+  describe('tRPC health', () => {
+    it('should return tRPC health check result', async () => {
+      const result = await appController.healthCheck()
+      expect(result).toHaveProperty('result')
+      expect(result.result).toHaveProperty('data')
     })
   })
 })
