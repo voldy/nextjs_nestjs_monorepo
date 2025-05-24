@@ -45,34 +45,37 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 
 ## 📁 Project Structure
 
-├── frontend/ # Next.js 15 application
-│ ├── src/
-│ │ ├── app/ # App Router (Next.js 15)
-│ │ ├── components/ # Reusable components (shadcn/ui)
-│ │ └── lib/ # Utilities and helpers
-│ ├── project.json # Nx project configuration
-│ └── README.md
-├── backend/ # NestJS 11 API server
-│ ├── src/
-│ │ ├── app.module.ts
-│ │ ├── app.controller.ts
-│ │ └── main.ts
-│ ├── test/ # End-to-end tests
-│ ├── project.json # Nx project configuration
-│ └── README.md
+```
+├── frontend/             # Next.js 15 application
+│   ├── src/
+│   │   ├── app/         # App Router (Next.js 15)
+│   │   ├── components/  # Reusable components (shadcn/ui)
+│   │   └── lib/         # Utilities and helpers
+│   ├── project.json     # Nx project configuration
+│   └── README.md
+├── backend/              # NestJS 11 API server
+│   ├── src/
+│   │   ├── app.module.ts
+│   │   ├── app.controller.ts
+│   │   └── main.ts
+│   ├── test/            # End-to-end tests
+│   ├── project.json     # Nx project configuration
+│   └── README.md
 ├── packages/
-│ └── shared/ # Shared utilities library
-│ ├── src/
-│ │ ├── index.ts # Main exports
-│ │ ├── env.ts # Environment validation (Zod)
-│ │ └── lib/ # Utility functions
-│ ├── project.json # Nx project configuration
-│ └── README.md
-├── frontend-e2e/ # Playwright end-to-end tests
-├── nx.json # Nx workspace configuration
-├── eslint.config.mjs # ESLint flat config for all projects
-├── tsconfig.base.json # Base TypeScript configuration
-└── package.json # Root workspace configuration
+│   └── shared/          # Shared utilities library
+│       ├── src/
+│       │   ├── index.ts # Main exports
+│       │   ├── env/     # Shared environment variables (NODE_ENV only)
+│       │   ├── utils/   # Cross-platform utilities
+│       │   └── trpc/    # tRPC router and type definitions
+│       ├── project.json # Nx project configuration
+│       └── README.md
+├── frontend-e2e/         # Playwright end-to-end tests
+├── nx.json               # Nx workspace configuration
+├── eslint.config.mjs     # ESLint flat config for all projects
+├── tsconfig.base.json    # Base TypeScript configuration
+└── package.json          # Root workspace configuration
+```
 
 ---
 
@@ -80,20 +83,23 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 
 The monorepo includes a shared utilities library (`@shared`) that provides:
 
-- **Environment validation** with Zod schema validation
-- **Cross-platform utilities** (browser detection, logging, etc.)
+- **Environment validation** with clean separation of concerns (only NODE_ENV shared)
+- **Cross-platform utilities** (browser detection, logging, deep merge, etc.)
+- **tRPC setup** for end-to-end type safety between frontend and backend
 - **Type-safe imports** across frontend and backend
 - **Hot reloading** in development mode
 
 ### Usage Example
 
-````typescript
+```typescript
 // In frontend (Next.js) or backend (NestJS)
-import { Env, logger, isBrowser, deepMerge } from '@shared'
+import { Env, logger, isBrowser, deepMerge, appRouter } from '@shared'
 
-// Environment variables (validated with Zod)
-console.log(`Running on port: ${Env.PORT}`)
+// Shared environment variables (minimal - only NODE_ENV)
 console.log(`Environment: ${Env.NODE_ENV}`)
+
+// Frontend-specific env: Use FrontendEnv from frontend/src/env.ts
+// Backend-specific env: Use BackendEnv from backend/src/env.ts
 
 // Cross-platform utilities
 if (isBrowser()) {
@@ -104,6 +110,11 @@ if (isBrowser()) {
 
 // Deep object merging
 const merged = deepMerge(defaultConfig, userConfig)
+
+// tRPC type safety (types shared, implementation separate)
+// Frontend: Uses appRouter for client setup
+// Backend: Exports appRouter as actual API
+```
 
 See [`packages/shared/README.md`](packages/shared/README.md) for detailed documentation.
 
@@ -154,7 +165,7 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 
    ```bash
    pnpm install
-````
+   ```
 
 2. **Start development servers:**
 
@@ -177,11 +188,12 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 
 ### Monorepo Scripts
 
-````bash
+```bash
 pnpm dev              # Start both apps in development mode
 pnpm build            # Build both apps for production
 pnpm test             # Run tests for all projects
 pnpm lint             # Lint all projects with ESLint
+```
 
 ### Individual Project Scripts
 
@@ -198,6 +210,7 @@ nx build backend      # Build backend for production
 nx test backend       # Run backend tests
 nx lint backend       # Lint backend code
 nx start backend      # Start built backend in production mode
+```
 
 ---
 
@@ -217,6 +230,7 @@ nx graph
 
 # Reset Nx cache
 nx reset
+```
 
 ### Code Quality
 
@@ -254,6 +268,7 @@ mockUseApi.mockReturnValue({
   error: null,
   execute: jest.fn(),
 })
+```
 
 ### Environment-Specific Testing
 
@@ -274,6 +289,7 @@ nx e2e frontend-e2e
 
 # Run integration tests specifically
 nx test frontend --testPathPattern=integration
+```
 
 See [`frontend/src/test-utils/integration-test-example.md`](frontend/src/test-utils/integration-test-example.md) for detailed testing documentation.
 
@@ -291,6 +307,7 @@ nx build backend --configuration=production
 
 # Start production server (backend)
 nx start:prod backend
+```
 
 ### Environment Variables
 
@@ -309,6 +326,7 @@ CORS_ORIGINS=https://yourdomain.com,https://app.yourdomain.com
 
 # Shared environment (automatically detected)
 NODE_ENV=production
+```
 
 ---
 
@@ -321,6 +339,7 @@ pnpm add -w <package>
 # Add to specific project
 pnpm add <package> --filter frontend
 pnpm add <package> --filter backend
+```
 
 ---
 
@@ -332,6 +351,7 @@ The frontend uses [shadcn/ui](https://ui.shadcn.com/docs) for reusable, accessib
 # Add a new component
 pnpm shadcn add button
 pnpm shadcn add card
+```
 
 Components are automatically installed to `frontend/src/components/ui/`.
 
@@ -355,6 +375,7 @@ pnpm exec nx g @nx/nest:guard auth --project=backend
 pnpm exec nx g @nx/nest:interceptor logging --project=backend
 pnpm exec nx g @nx/nest:pipe validation --project=backend
 pnpm exec nx g @nx/nest:filter exception --project=backend
+```
 
 All generators automatically follow NestJS conventions and integrate with the Nx workspace.
 
@@ -399,4 +420,3 @@ Please update relevant READMEs if you change project structure or conventions.
 - **pnpm** for efficient dependency management
 - **Next.js** optimizations (Image, Font, Bundle optimization)
 - **Incremental builds** and smart task execution
-````

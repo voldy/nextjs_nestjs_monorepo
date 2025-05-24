@@ -1,16 +1,16 @@
 // Browser detection utilities
-export { isBrowser } from './lib/isBrowser.ts'
+export { isBrowser } from './utils/isBrowser.ts'
 
 // Environment configuration
-export { Env } from './env.ts'
+export { Env } from './env/env.ts'
 
 // Logging utilities
-export { logger } from './lib/logger.ts'
+export { logger } from './utils/logger.ts'
 
 // Utility functions
-export { deepMerge } from './lib/deepMerge.ts'
-export { sleep } from './lib/sleep.ts'
+export { deepMerge } from './utils/deepMerge.ts'
+export { sleep } from './utils/sleep.ts'
 
 // tRPC API (router, types, and utilities)
-export { appRouter } from './lib/trpc/index.ts'
-export type { AppRouter, TrpcContext } from './lib/trpc/index.ts'
+export { appRouter } from './trpc/index.ts'
+export type { AppRouter, TrpcContext } from './trpc/index.ts'

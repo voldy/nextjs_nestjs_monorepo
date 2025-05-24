@@ -7,5 +7,4 @@
 !.lintstagedrc
 
 # Ignore (block edits) on sensitive files (e.g. .env, .secret, etc.) 
-.env
 .secret

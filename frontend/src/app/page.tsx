@@ -12,7 +12,7 @@ import { HealthStatus } from '@/components/health-status'
 
 // Import from shared package
 import { logger, isBrowser } from '@shared'
-import { FrontendEnv } from '../env.js'
+import { FrontendEnv } from '../env'
 
 const notifications = [
   {
@@ -31,7 +31,7 @@ const notifications = [
 
 type CardProps = React.ComponentProps<typeof Card>
 
-export function CardDemo({ className, ...props }: CardProps) {
+function CardDemo({ className, ...props }: CardProps) {
   return (
     <Card className={cn('w-[380px]', className)} {...props}>
       <CardHeader>
