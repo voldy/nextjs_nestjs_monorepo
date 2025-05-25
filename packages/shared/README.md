@@ -80,7 +80,7 @@ CORS_ORIGINS=https://yourdomain.com,https://app.yourdomain.com
 
 ## 🔗 tRPC Integration
 
-End-to-end type-safe API communication:
+End-to-end type-safe API communication with comprehensive documentation:
 
 ```ts
 import { appRouter, type AppRouter } from '@shared'
@@ -88,6 +88,32 @@ import { appRouter, type AppRouter } from '@shared'
 // The shared router provides type safety across frontend and backend
 // Frontend uses this for tRPC client setup
 // Backend exports this as the actual API router
+```
+
+### tRPC API Documentation
+
+All tRPC procedures are documented with comprehensive JSDoc comments:
+
+- **Location**: [`src/trpc/routers/`](src/trpc/routers/)
+- **Type Safety**: Full TypeScript IntelliSense and auto-completion
+- **Examples**: Code examples in JSDoc comments
+- **Validation**: Zod schemas for runtime type checking
+
+**Available Procedures:**
+
+- `health.check()` - System health information
+- `health.echo(message)` - Echo test for connectivity
+- `health.ping(delay?)` - Ping/pong with optional delay
+
+**Usage Example:**
+
+```typescript
+// Frontend usage with full type safety
+const health = await trpc.health.check.query()
+console.log(health.status) // TypeScript knows the exact type
+
+const pong = await trpc.health.ping.query({ delay: 1000 })
+console.log(pong.message) // "🏓 Pong from tRPC server!"
 ```
 
 ## 🔍 Cross-Platform Utilities

@@ -204,6 +204,41 @@ See `prisma/schema.prisma` for all models.
 
 ---
 
+## 📚 API Documentation
+
+### Interactive API Documentation (Swagger)
+
+The backend provides comprehensive API documentation via Swagger UI:
+
+- **Development**: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
+- **OpenAPI JSON**: [http://localhost:3000/api/docs/swagger.json](http://localhost:3000/api/docs/swagger.json)
+- **OpenAPI YAML**: [http://localhost:3000/api/docs/swagger.yaml](http://localhost:3000/api/docs/swagger.yaml)
+
+The Swagger documentation includes:
+
+- Interactive API testing interface
+- Request/response schemas with examples
+- Authentication requirements
+- Error response documentation
+- Rate limiting information
+
+### tRPC Integration
+
+The backend also exposes tRPC endpoints for type-safe frontend communication:
+
+- **Endpoint**: `/trpc/*` (development only)
+- **Documentation**: See [`packages/shared/src/trpc/routers/`](../packages/shared/src/trpc/routers/)
+- **Type Safety**: Full end-to-end type safety with the frontend
+- **Validation**: Runtime validation with Zod schemas
+
+**Available tRPC Procedures:**
+
+- `health.check()` - System health information
+- `health.echo(message)` - Echo test
+- `health.ping(delay?)` - Connectivity test
+
+---
+
 ## �� API Endpoints
 
 ### Health Check

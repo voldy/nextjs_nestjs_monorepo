@@ -1,9 +1,12 @@
 import { Controller, Get, Inject } from '@nestjs/common'
+import { ApiTags, ApiOperation, ApiResponse, ApiExcludeEndpoint } from '@nestjs/swagger'
 import { AppService } from './app.service.ts'
 import { PrismaService } from './prisma/prisma.service.ts'
 import { appRouter } from '@shared'
 import { logger } from '@shared'
+import { HealthCheckResponseDto, WelcomeResponseDto } from './dto/health-check.dto.ts'
 
+@ApiTags('Health')
 @Controller()
 export class AppController {
   constructor(
@@ -12,12 +15,42 @@ export class AppController {
   ) {}
 
   @Get()
+  @ApiOperation({
+    summary: 'Welcome message',
+    description: 'Returns a simple welcome message from the API',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Welcome message returned successfully',
+    type: WelcomeResponseDto,
+  })
   getHello() {
     return this.appService.getHello()
   }
 
   // Simple health check for load balancers (no /api prefix)
   @Get('health')
+  @ApiOperation({
+    summary: 'Health check',
+    description:
+      'Returns system health status including database connectivity, memory usage, and uptime. Used by load balancers and monitoring systems.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Health check completed successfully',
+    type: HealthCheckResponseDto,
+  })
+  @ApiResponse({
+    status: 503,
+    description: 'Service degraded or unavailable',
+    schema: {
+      type: 'object',
+      properties: {
+        status: { type: 'string', example: 'error' },
+        error: { type: 'string', example: 'Health check failed' },
+      },
+    },
+  })
   async simpleHealthCheck() {
     try {
       const memoryUsage = process.memoryUsage()
@@ -64,6 +97,7 @@ export class AppController {
 
   // Keep tRPC health endpoint for development/testing only
   @Get('trpc/health.check')
+  @ApiExcludeEndpoint()
   async healthCheck() {
     const caller = appRouter.createCaller({})
     const result = await caller.health.check()

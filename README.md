@@ -127,7 +127,6 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 - **Base config**: `tsconfig.base.json` with modern `moduleResolution: "NodeNext"`
 - **Project references**: Proper TypeScript project references for fast builds
 - **Path mapping**: `@shared` imports work across all projects
-- **Extensionless imports**: Clean import syntax without `.js`/`.ts` extensions
 
 ### ESLint Configuration
 
@@ -139,7 +138,6 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 ### Jest Testing
 
 - **Shared package support**: Jest configured to resolve `@shared` imports
-- **Module mapping**: Automatic `.js` to `.ts` resolution for testing
 - **Cross-project testing**: Tests work seamlessly across all packages
 - **Fast execution**: Optimized Jest configuration for monorepo testing
 
@@ -217,6 +215,68 @@ pnpm test:shared      # Run shared package tests only
 nx build shared       # Build shared package
 nx lint shared        # Lint shared package code
 ```
+
+---
+
+## 📚 API Documentation
+
+This monorepo provides comprehensive API documentation for both REST and tRPC endpoints:
+
+### REST API Documentation (OpenAPI/Swagger)
+
+- **URL**: [http://localhost:3000/api/docs](http://localhost:3000/api/docs) (development)
+- **Format**: Interactive Swagger UI with OpenAPI 3.0 specification
+- **Purpose**: Documents REST endpoints for external integrations, webhooks, and third-party services
+- **Features**:
+  - Interactive API testing
+  - Request/response schemas
+  - Authentication examples
+  - Error response documentation
+
+**Available REST Endpoints:**
+
+- `GET /health` - System health check (used by load balancers)
+- `GET /api` - Welcome message
+- Additional REST endpoints for external integrations
+
+### tRPC API Documentation (Type-Safe)
+
+- **Location**: [`packages/shared/src/trpc/routers/`](packages/shared/src/trpc/routers/)
+- **Format**: TypeScript code comments with JSDoc
+- **Purpose**: Type-safe communication between frontend and backend
+- **Features**:
+  - End-to-end type safety
+  - Auto-completion in IDEs
+  - Runtime type validation with Zod
+  - Real-time updates with React Query integration
+
+**Available tRPC Procedures:**
+
+- `health.check()` - Comprehensive system health information
+- `health.echo(message)` - Echo test for connectivity
+- `health.ping(delay?)` - Ping/pong with optional delay
+
+**Example tRPC Usage:**
+
+```typescript
+// Frontend usage with full type safety
+import { trpc } from '@/lib/trpc'
+
+// Health check
+const health = await trpc.health.check.query()
+console.log(health.status) // TypeScript knows this is 'ok' | 'degraded' | 'error'
+
+// Ping test
+const pong = await trpc.health.ping.query({ delay: 1000 })
+console.log(pong.message) // "🏓 Pong from tRPC server!"
+```
+
+### Documentation Strategy
+
+1. **REST Endpoints**: Use Swagger/OpenAPI for external integrations and webhook documentation
+2. **tRPC Endpoints**: Rely on TypeScript types and comprehensive code comments
+3. **Shared Types**: All API types are defined in the shared package for consistency
+4. **Auto-Discovery**: tRPC endpoints are auto-discoverable via TypeScript IntelliSense
 
 ---
 

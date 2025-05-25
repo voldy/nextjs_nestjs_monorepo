@@ -39,7 +39,7 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["src/**/*", "test/**/*", "prisma/**/*", "jest.config.cjs"],
+  "include": ["src/**/*", "test/**/*", "prisma/**/*", "jest.config.cjs", "test-api-docs.ts"],
   "exclude": ["node_modules", "dist"],
   "references": [
     {

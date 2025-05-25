@@ -6,12 +6,16 @@ import { HttpStatus, ValidationPipe } from '@nestjs/common'
 import { BackendEnv } from './env.ts'
 import { logger } from '@shared'
 import { configureSecurity } from './config/security.config.ts'
+import { setupSwagger } from './config/swagger.config.ts'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ logger: false }))
 
   // Configure security middleware
   await configureSecurity(app)
+
+  // Setup API documentation
+  setupSwagger(app)
 
   // Global prefix for all routes
   app.setGlobalPrefix('api', { exclude: ['/health'] })
@@ -34,6 +38,7 @@ async function bootstrap() {
   logger.log(`🗄️ Database: ${BackendEnv.DATABASE_URL.split('@')[1] || 'configured'}`) // Hide credentials
   logger.log(`🔒 CORS enabled for frontend origins`)
   logger.log(`🛡️  Security headers enabled with Helmet`)
+  logger.log(`📚 API Documentation: ${BackendEnv.BACKEND_URL}/api/docs`)
 }
 
 bootstrap().catch((error) => {
