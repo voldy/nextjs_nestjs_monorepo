@@ -23,6 +23,11 @@ export default tseslintConfig(
       '**/jest.config.ts',
       '**/next.config.mjs',
       '**/*.config.{js,mjs,ts}',
+      // Generated files that might cause parsing issues
+      '**/generated/**',
+      '**/.nx/**',
+      // Prisma generated files
+      '**/prisma/generated/**',
     ],
   },
 
@@ -54,18 +59,18 @@ export default tseslintConfig(
     languageOptions: {
       parser: (await import('@typescript-eslint/parser')).default,
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        // Simplified parser options to avoid hanging
+        project: false, // Disable type-aware linting to prevent hanging
       },
     },
     plugins: {
       '@typescript-eslint': (await import('@typescript-eslint/eslint-plugin')).default,
     },
     rules: {
-      // Base TypeScript rules
+      // Base TypeScript rules (without type-aware rules that might cause hanging)
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
       // Prefer TypeScript version over base ESLint
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [

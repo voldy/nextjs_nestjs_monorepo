@@ -1,5 +1,5 @@
 import { UserEntity } from '../../domain/entities/user.entity.ts'
-import { UserRole } from '../../../../../generated/prisma/index.js'
+import { UserRole } from '@generated/prisma/index.js'
 
 // User Entity Factory Parameters
 export interface UserEntityParams {

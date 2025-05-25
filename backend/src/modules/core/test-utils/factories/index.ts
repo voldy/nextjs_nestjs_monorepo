@@ -22,4 +22,4 @@ export async function resetAllFactories(): Promise<void> {
 }
 
 // Re-export common types for convenience
-export { UserRole } from '../../../../../generated/prisma/index.js'
+export { UserRole } from '@generated/prisma/index.js'

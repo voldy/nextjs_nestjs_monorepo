@@ -1,5 +1,5 @@
 import type { CreateUserDto, UpdateUserDto } from '../../application/services/user.service.ts'
-import { UserRole } from '../../../../../generated/prisma/index.js'
+import { UserRole } from '@generated/prisma/index.js'
 
 // Create User DTO Factory
 export class CreateUserDtoFactory {

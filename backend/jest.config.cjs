@@ -29,6 +29,7 @@ module.exports = {
     '^(\\.{1,2}/.*)\\.js$': '$1',
     '^@shared$': '<rootDir>/../../packages/shared/src/index.ts',
     '^@shared/(.*)$': '<rootDir>/../../packages/shared/src/$1',
+    '^@generated/(.*)$': '<rootDir>/../generated/$1',
   },
   transformIgnorePatterns: ['node_modules/(?!(.pnpm/)?(@trpc|@tanstack|superjson))'],
 }

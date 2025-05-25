@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, Inject } from '@nestjs/common'
 import { UserEntity } from '../../domain/entities/user.entity.ts'
 import type { IUserRepository } from '../../domain/repositories/user.repository.interface.ts'
-import { UserRole } from '../../../../../generated/prisma/index.js'
+import { UserRole } from '@generated/prisma/index.js'
 
 // DTOs for the service
 export interface CreateUserDto {

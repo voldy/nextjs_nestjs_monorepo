@@ -32,7 +32,8 @@
     "useDefineForClassFields": false,
     "paths": {
       "@shared": ["packages/shared/src/index.ts"],
-      "@shared/*": ["packages/shared/src/*"]
+      "@shared/*": ["packages/shared/src/*"],
+      "@generated/*": ["backend/generated/*"]
     }
   },
   "ts-node": {

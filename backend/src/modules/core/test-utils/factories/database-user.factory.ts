@@ -1,4 +1,4 @@
-import { UserRole } from '../../../../../generated/prisma/index.js'
+import { UserRole } from '@generated/prisma/index.js'
 
 // Database User Record (matches Prisma User model)
 export interface DatabaseUserRecord {

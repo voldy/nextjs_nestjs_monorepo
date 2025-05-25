@@ -1,7 +1,7 @@
 import { UserEntityFactory } from './user-entity.factory.ts'
 import { CreateUserDtoFactory, UpdateUserDtoFactory } from './user-dto.factory.ts'
 import { DatabaseUserFactory } from './database-user.factory.ts'
-import { UserRole } from '../../../../../generated/prisma/index.js'
+import { UserRole } from '@generated/prisma/index.js'
 
 // Test scenarios that combine multiple factories
 export class TestScenariosFactory {

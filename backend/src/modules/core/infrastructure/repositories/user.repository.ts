@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../database/prisma.service.ts'
 import { IUserRepository } from '../../domain/repositories/user.repository.interface.ts'
 import { UserEntity } from '../../domain/entities/user.entity.ts'
-import { UserRole, Prisma } from '../../../../../generated/prisma/index.js'
+import { UserRole, Prisma } from '@generated/prisma/index.js'
 
 @Injectable()
 export class UserRepository implements IUserRepository {
