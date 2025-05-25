@@ -117,3 +117,10 @@ Thumbs.db
 
 # Nx specific (moved to end for clarity)
 .github/instructions/nx.instructions.md
+
+# Prisma
+**/generated/
+**/.prisma/
+**/migrations/migration_lock.toml
+**/migrations/*.tmp
+**/schema.prisma.backup

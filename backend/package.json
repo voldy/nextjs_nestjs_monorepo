@@ -7,8 +7,10 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^6.8.2",
     "@trpc/server": "^11.0.0-rc.553",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.2"
+    "class-validator": "^0.14.2",
+    "prisma": "^6.8.2"
   }
 }

@@ -190,8 +190,9 @@ See [`packages/shared/README.md`](packages/shared/README.md) for detailed docume
 
 ```bash
 pnpm dev              # Start both apps in development mode
-pnpm build            # Build both apps for production
-pnpm test             # Run tests for all projects
+pnpm build            # Build all projects for production
+pnpm test             # Run tests for ALL projects (backend, frontend, shared)
+pnpm test:watch       # Run all tests in watch mode
 pnpm lint             # Lint all projects with ESLint
 ```
 
@@ -200,16 +201,21 @@ pnpm lint             # Lint all projects with ESLint
 ```bash
 # Frontend
 pnpm dev:frontend     # Start Next.js dev server
+pnpm test:frontend    # Run frontend tests only
 nx build frontend     # Build frontend for production
-nx test frontend      # Run frontend tests
 nx lint frontend      # Lint frontend code
 
 # Backend
 pnpm dev:backend      # Start NestJS dev server with watch mode
+pnpm test:backend     # Run backend tests only
 nx build backend      # Build backend for production
-nx test backend       # Run backend tests
 nx lint backend       # Lint backend code
 nx start backend      # Start built backend in production mode
+
+# Shared Package
+pnpm test:shared      # Run shared package tests only
+nx build shared       # Build shared package
+nx lint shared        # Lint shared package code
 ```
 
 ---
@@ -277,8 +283,18 @@ mockUseApi.mockReturnValue({
 - **Shared**: Uses `packages/shared/src/env.ts` for truly shared variables
 
 ```bash
-# Run all tests
+# Run all tests across the entire monorepo
 pnpm test
+
+# Run tests for specific projects
+pnpm test:backend     # Backend tests only
+pnpm test:frontend    # Frontend tests only
+pnpm test:shared      # Shared package tests only
+
+# Run tests in watch mode
+pnpm test:watch       # All projects in watch mode
+nx test backend --watch
+nx test frontend --watch
 
 # Run tests with coverage
 nx test frontend --coverage

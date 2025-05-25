@@ -23,7 +23,7 @@ export function PingButton() {
   )
 
   const handlePing = () => {
-    refetch()
+    void refetch()
   }
 
   return (

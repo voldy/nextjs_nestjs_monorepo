@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
-import { AppModule } from './app.module.js'
+import { AppModule } from './app.module.ts'
 import { HttpStatus, ValidationPipe } from '@nestjs/common'
-import { BackendEnv } from './env.js'
+import { BackendEnv } from './env.ts'
 import { logger } from '@shared'
 import { configureSecurity } from './config/security.config.ts'
 

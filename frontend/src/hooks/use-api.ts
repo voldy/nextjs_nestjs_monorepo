@@ -16,7 +16,7 @@ interface ApiCall<T> {
   refetch: () => Promise<void>
 }
 
-const cache = new Map<string, { data: any; timestamp: number }>()
+const cache = new Map<string, { data: unknown; timestamp: number }>()
 
 export function useApi<T>(endpoint: string, options: UseApiOptions = {}): ApiCall<T> {
   const {
@@ -37,7 +37,7 @@ export function useApi<T>(endpoint: string, options: UseApiOptions = {}): ApiCal
       if (useCache) {
         const cached = cache.get(endpoint)
         if (cached && Date.now() - cached.timestamp < cacheTime) {
-          setData(cached.data)
+          setData(cached.data as T)
           return
         }
       }
@@ -80,7 +80,7 @@ export function useApi<T>(endpoint: string, options: UseApiOptions = {}): ApiCal
         if (retryCount < retry) {
           setTimeout(
             () => {
-              fetchData(retryCount + 1)
+              void fetchData(retryCount + 1)
             },
             retryDelay * (retryCount + 1),
           ) // Exponential backoff

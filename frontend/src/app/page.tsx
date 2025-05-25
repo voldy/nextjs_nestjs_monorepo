@@ -11,7 +11,7 @@ import { PingButton } from '@/components/ping-button'
 import { HealthStatus } from '@/components/health-status'
 
 // Import from shared package
-import { logger, isBrowser } from '@shared'
+import { isBrowser } from '@shared'
 import { FrontendEnv } from '../env'
 
 const notifications = [
@@ -69,9 +69,6 @@ function CardDemo({ className, ...props }: CardProps) {
 }
 
 export default function Home() {
-  // Test shared package integration in Server Component
-  logger.log('Environment:', FrontendEnv.NODE_ENV)
-
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">

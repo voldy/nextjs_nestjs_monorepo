@@ -1,50 +1,95 @@
 # Backend API (`backend`)
 
-This is the NestJS 11 backend API server for the monorepo. It provides a robust, scalable server-side application using TypeScript, modern decorators, and dependency injection.
-
----
-
-## 🚀 Tech Stack
-
-- **Framework**: NestJS 11 with TypeScript
-- **Runtime**: Node.js with modern ES2022 features
-- **Compilation**: SWC for fast builds and hot reloading
-- **Architecture**: Modular design with decorators and dependency injection
-- **Testing**: Jest with NestJS testing utilities and Supertest
-- **HTTP Framework**: Express.js (configurable)
-- **Linting**: ESLint 9+ with Node.js and TypeScript rules
-- **Monorepo Integration**: Nx workspace with `@nx/nest` plugin for code generation
-- **Package Management**: Dependencies managed at workspace root level
-- **Shared Utilities**: `@shared` package for cross-platform utilities and environment validation
+This is the NestJS 11 backend API server for the monorepo. It provides a robust, scalable server-side application using TypeScript, modern decorators, and dependency injection with **Prisma ORM** and **PostgreSQL**.
 
 ---
 
 ## 🛠️ Getting Started
 
-### From Monorepo Root
+### Prerequisites
 
-1. **Install dependencies:**
+- Node.js 18+ and pnpm
+- PostgreSQL database server (local or remote)
+- For production: Supabase account (recommended)
+
+### Development Setup
+
+1. **Install dependencies**
 
    ```bash
+   # From monorepo root
    pnpm install
    ```
 
-2. **Start development server:**
+2. **Configure your PostgreSQL database**
+
+   - Ensure PostgreSQL is running on your system
+   - Create a development database (e.g., `monorepo_dev`)
+   - Create a test database (e.g., `monorepo_test`)
+
+3. **Configure environment variables**
+
+   Copy `.env.example` to `.env` in the root directory and update the database URLs:
+
+   ```bash
+   # Development database
+   DATABASE_URL="postgresql://username:password@localhost:5432/monorepo_dev?schema=public"
+
+   # Test database (optional - for running tests against a separate database)
+   TEST_DATABASE_URL="postgresql://username:password@localhost:5432/monorepo_test?schema=public"
+   ```
+
+4. **Setup the database**
+
+   ```bash
+   cd backend
+
+   # Generate Prisma client
+   pnpm db:generate
+
+   # Create and run migrations
+   pnpm db:migrate
+
+   # Seed the database (optional)
+   pnpm db:seed
+   ```
+
+5. **Start development server**
 
    ```bash
    # Start backend only
-   pnpm dev:backend
+   pnpm start:dev
 
-   # Or start both frontend and backend
-   pnpm dev
+   # Or from monorepo root to start both frontend and backend
+   cd .. && pnpm dev
    ```
 
-3. **API Available at:** [http://localhost:3000](http://localhost:3000)
+6. **API Available at:** [http://localhost:3000](http://localhost:3000)
 
-### Direct Nx Commands
+### Production Setup (Supabase)
+
+1. **Create a Supabase project**
+
+   - Go to [supabase.com](https://supabase.com)
+   - Create a new project
+   - Get your database URL from Project Settings > Database
+
+2. **Set production environment variables**
+
+   ```bash
+   # Production database (Supabase)
+   DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
+   ```
+
+3. **Deploy migrations**
+   ```bash
+   pnpm db:deploy
+   ```
+
+### Alternative: Direct Nx Commands
 
 ```bash
-# Development server (watch mode)
+# Development server (with watch mode)
 nx start:dev backend
 
 # Production build
@@ -62,6 +107,52 @@ nx lint backend
 
 ---
 
+## 📋 Available Scripts
+
+### Database Management
+
+- `pnpm db:generate` — Generate Prisma client
+- `pnpm db:migrate` — Run database migrations (development)
+- `pnpm db:push` — Push schema changes without migration
+- `pnpm db:seed` — Seed the database with initial data
+- `pnpm db:studio` — Open Prisma Studio (database GUI)
+- `pnpm db:reset` — Reset database and run migrations
+- `pnpm db:deploy` — Deploy migrations (production)
+
+### Development
+
+- `pnpm start:dev` — Start development server with hot reload
+- `pnpm start:debug` — Start development server with debugging
+- `pnpm build` — Build for production
+- `pnpm start` — Start production server
+
+### Testing
+
+- `pnpm test` — Run unit tests
+- `pnpm test:watch` — Run tests in watch mode
+- `pnpm test:cov` — Run tests with coverage
+- `pnpm test:e2e` — Run end-to-end tests
+
+### Monorepo Testing
+
+From the root directory:
+
+- `pnpm test` — Run tests for ALL projects (backend, frontend, shared)
+- `pnpm test:backend` — Run backend tests only
+- `pnpm test:watch` — Run all tests in watch mode
+
+---
+
+## 📦 Environment Variables
+
+| Variable            | Description                     | Example                                                                     |
+| ------------------- | ------------------------------- | --------------------------------------------------------------------------- |
+| `DATABASE_URL`      | PostgreSQL connection string    | `postgresql://username:password@localhost:5432/monorepo_dev?schema=public`  |
+| `TEST_DATABASE_URL` | Test database connection string | `postgresql://username:password@localhost:5432/monorepo_test?schema=public` |
+| `BACKEND_PORT`      | Server port                     | `3000`                                                                      |
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -69,31 +160,75 @@ backend/
 ├── src/
 │   ├── app.controller.ts       # Main application controller
 │   ├── app.controller.spec.ts  # Controller tests
-│   ├── app.module.ts          # Root application module
-│   ├── app.service.ts         # Main application service
-│   └── main.ts                # Application entry point
+│   ├── app.module.ts           # Root application module
+│   ├── app.service.ts          # Main application service
+│   ├── prisma/                 # Prisma integration (service/module)
+│   │   ├── prisma.service.ts      # Prisma main service
+│   │   ├── prisma.module.ts       # Global Prisma module
+│   │   └── prisma-test.service.ts # Testing utilities
+│   ├── users/                  # User module, service, controller, tests
+│   └── test-utils/             # Database test utilities
+│       └── database-test.utils.ts
+│   └── main.ts                 # Application entry point
+├── prisma/
+│   ├── schema.prisma           # Database schema
+│   └── seed.ts                 # Database seeding script
 ├── test/
-│   ├── app.e2e-spec.ts       # End-to-end tests
-│   └── jest-e2e.json         # E2E test configuration
-├── dist/                      # Compiled output (after build)
-├── project.json              # Nx project configuration
-├── tsconfig.json             # TypeScript configuration
-├── jest.config.js            # Jest test configuration
-├── nest-cli.json            # NestJS CLI configuration
+│   ├── app.e2e-spec.ts         # End-to-end tests
+│   └── jest-e2e.json           # E2E test configuration
+├── dist/                       # Compiled output (after build)
+├── project.json                # Nx project configuration
+├── tsconfig.json               # TypeScript configuration
+├── jest.config.js              # Jest test configuration
+├── nest-cli.json               # NestJS CLI configuration
 └── README.md
 ```
 
 ---
 
-## 🎯 API Endpoints
+## 🗄️ Database Schema
 
-### Available Routes
+The current schema includes:
+
+### User Model
+
+- `id` - Unique identifier (CUID)
+- `email` - Unique email address
+- `name` - Optional display name
+- `role` - User role (USER, ADMIN, MODERATOR)
+- `createdAt` - Creation timestamp
+- `updatedAt` - Last update timestamp
+- `deletedAt` - Soft delete timestamp (nullable)
+
+See `prisma/schema.prisma` for all models.
+
+---
+
+## �� API Endpoints
+
+### Health Check
+
+The API includes a health check endpoint for monitoring and load balancer health checks:
+
+- **GET /health** - Health check endpoint
+
+  ```bash
+  curl http://localhost:3000/health
+  # Response: { "status": "ok", "timestamp": "2024-01-01T00:00:00.000Z" }
+  ```
 
 - **GET /** - Welcome message from the API
   ```bash
   curl http://localhost:3000
   # Response: "Hello World!"
   ```
+
+The health check endpoint is excluded from the global `/api` prefix and can be used by:
+
+- Load balancers to check if the service is healthy
+- Monitoring systems (Prometheus, DataDog, etc.)
+- Container orchestration platforms (Docker, Kubernetes)
+- CI/CD pipelines for deployment verification
 
 ### Adding New Endpoints
 
@@ -134,17 +269,15 @@ nest generate module users
 ### Running Tests
 
 ```bash
-# Unit tests
-nx test backend
+# From monorepo root (recommended)
+pnpm test:backend     # Run backend tests only
+pnpm test             # Run tests for all projects
 
-# End-to-end tests
-nx test:e2e backend
-
-# Test coverage
-nx test:cov backend
-
-# Watch mode
-nx test:watch backend
+# Direct Nx commands
+nx test backend       # Unit tests
+nx test:e2e backend   # End-to-end tests
+nx test:cov backend   # Test coverage
+nx test:watch backend # Watch mode
 ```
 
 ### Test Structure
@@ -153,6 +286,15 @@ nx test:watch backend
 - **E2E tests**: Located in `test/` directory (`*.e2e-spec.ts`)
 - **Setup**: Uses Jest + NestJS testing utilities + Supertest
 - **Mocking**: Automatic dependency injection mocking
+- **Database Testing**: Uses PrismaTestService and helpers
+
+### Test Database Configuration
+
+Tests automatically use a separate test database:
+
+- Uses `TEST_DATABASE_URL` if set in environment
+- Falls back to `postgresql://localhost:5432/monorepo_test`
+- Set via `src/test-setup.ts` which runs before each test suite
 
 ### Example Test
 
@@ -282,6 +424,7 @@ export class UsersController {
 - `@nestjs/platform-fastify` - HTTP adapter (Express alternative)
 - `reflect-metadata` - Metadata reflection for decorators
 - `rxjs` - Reactive programming utilities
+- `@prisma/client` & `prisma` - Prisma ORM and generated types
 
 ### Development Tools
 
@@ -299,6 +442,8 @@ export class UsersController {
 - **`tsconfig.json`**: TypeScript configuration optimized for NestJS
 - **`project.json`**: Nx project targets and build configurations
 - **`jest.config.js`**: Jest testing framework configuration
+- **`prisma/schema.prisma`**: Prisma schema for DB
+- **`prisma/seed.ts`**: Database seeding script
 
 ---
 
@@ -332,9 +477,7 @@ export class UsersController {
 ### Adding Database Integration
 
 ```bash
-# Install TypeORM or Prisma
-pnpm add @nestjs/typeorm typeorm
-# or
+# Install Prisma (already included)
 pnpm add prisma @prisma/client
 
 # Generate database module
@@ -365,11 +508,31 @@ nest generate controller auth
 - **[TypeScript Handbook](https://www.typescriptlang.org/docs/)** - TypeScript reference
 - **[Jest Documentation](https://jestjs.io/docs/getting-started)** - Testing framework
 - **[SWC Documentation](https://swc.rs/)** - Fast compiler
+- **[Prisma Documentation](https://www.prisma.io/docs/)** - ORM and DB tooling
+- **[Supabase Documentation](https://supabase.com/docs/)** - Managed PostgreSQL (production)
 - **[Monorepo Root README](../README.md)** - Full monorepo documentation
 
 ---
 
 ## 🔧 Troubleshooting
+
+### Database Connection Issues
+
+1. Verify PostgreSQL is running
+2. Check database credentials in `.env`
+3. Ensure database exists
+4. Test connection: `pnpm db:studio`
+
+### Migration Issues
+
+1. Reset database: `pnpm db:reset`
+2. Regenerate client: `pnpm db:generate`
+3. Check schema syntax in `prisma/schema.prisma`
+
+### Type Errors
+
+1. Regenerate Prisma client: `pnpm db:generate`
+2. Restart TypeScript server in your editor
 
 ### Port Already in Use
 
@@ -420,6 +583,8 @@ import { Injectable } from '@nestjs/common'
 - **Follow module boundaries** for maintainable architecture
 - **Use environment variables** for configuration
 - **Leverage dependency injection** for testable code
+- **Write and run database migrations for all schema changes**
+- **Use Prisma for DB access, migrations, and seeding**
 
 ---
 
@@ -532,5 +697,3 @@ contentSecurityPolicy: {
 ```
 
 **⚠️ Important**: Always restrict CORS origins in production to prevent unauthorized access from malicious websites.
-
----

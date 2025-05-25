@@ -179,7 +179,12 @@ const finalConfig = deepMerge(defaultConfig, userConfig)
 ### Running Tests
 
 ```bash
-pnpm nx test shared
+# From monorepo root (recommended)
+pnpm test:shared      # Run shared package tests only
+pnpm test             # Run tests for all projects
+
+# Direct Nx command
+nx test shared        # Run shared package tests
 ```
 
 ### Building (for production)

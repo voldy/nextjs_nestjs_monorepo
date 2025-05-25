@@ -6,13 +6,18 @@
     "lint": "nx run-many -t eslint:lint",
     "prepare": "husky",
     "test": "nx run-many -t test",
+    "test:backend": "nx test backend",
+    "test:frontend": "nx test frontend",
+    "test:shared": "nx test shared",
+    "test:watch": "nx run-many -t test --watch",
     "build": "nx run-many -t build",
     "dev": "NODE_NO_WARNINGS=1 nx run-many -t serve,start:dev --parallel --output-style=stream",
     "dev:trace": "NODE_OPTIONS='--trace-deprecation' nx run-many -t serve,start:dev --parallel --output-style=stream",
     "dev:frontend": "nx serve frontend",
     "dev:backend": "nx start:dev backend",
     "dev:frontend:trace": "NODE_OPTIONS='--trace-deprecation' nx serve frontend",
-    "dev:backend:trace": "NODE_OPTIONS='--trace-deprecation' nx start:dev backend"
+    "dev:backend:trace": "NODE_OPTIONS='--trace-deprecation' nx start:dev backend",
+    "postinstall": "ln -sf ../.env backend/.env"
   },
   "private": true,
   "devDependencies": {

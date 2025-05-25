@@ -128,14 +128,15 @@ See the [shadcn/ui documentation](https://ui.shadcn.com/docs/components) for the
 ### Running Tests
 
 ```bash
-# Run all tests
-nx test frontend
+# From monorepo root (recommended)
+pnpm test:frontend    # Run frontend tests only
+pnpm test             # Run tests for all projects
+pnpm test:watch       # Run all tests in watch mode
 
-# Run tests in watch mode
-nx test frontend --watch
-
-# Run tests with coverage
-nx test frontend --coverage
+# Direct Nx commands
+nx test frontend      # Run all tests
+nx test frontend --watch      # Watch mode
+nx test frontend --coverage   # With coverage
 ```
 
 ### Test Structure

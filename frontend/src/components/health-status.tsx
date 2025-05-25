@@ -14,6 +14,10 @@ type HealthCheckResponse = {
     used: number
     total: number
   }
+  database: {
+    status: string
+    latency: number
+  }
 }
 
 export function HealthStatus() {
@@ -31,17 +35,43 @@ export function HealthStatus() {
   })
 
   useEffect(() => {
-    execute()
+    void execute()
   }, [execute])
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'ok':
+        return 'bg-green-500'
+      case 'degraded':
+        return 'bg-yellow-500'
+      case 'error':
+        return 'bg-red-500'
+      default:
+        return 'bg-gray-500'
+    }
+  }
+
+  const getDatabaseStatusColor = (dbStatus: string) => {
+    switch (dbStatus) {
+      case 'connected':
+        return 'bg-green-500'
+      case 'error':
+        return 'bg-red-500'
+      case 'disconnected':
+        return 'bg-gray-500'
+      default:
+        return 'bg-gray-500'
+    }
+  }
 
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span className={`h-3 w-3 rounded-full ${health?.status === 'ok' ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span className={`h-3 w-3 rounded-full ${getStatusColor(health?.status || 'error')}`} />
           Backend Health
         </CardTitle>
-        <CardDescription>Real-time server status with caching & retries</CardDescription>
+        <CardDescription>Real-time server status with database monitoring</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {isLoading && (
@@ -61,8 +91,34 @@ export function HealthStatus() {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Status:</span>
-              <span className="font-medium text-green-600">{health.status}</span>
+              <span
+                className={`font-medium ${
+                  health.status === 'ok'
+                    ? 'text-green-600'
+                    : health.status === 'degraded'
+                      ? 'text-yellow-600'
+                      : 'text-red-600'
+                }`}
+              >
+                {health.status}
+              </span>
             </div>
+
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Database:</span>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`h-2 w-2 rounded-full ${getDatabaseStatusColor(health.database?.status || 'disconnected')}`}
+                />
+                <span className="font-medium">
+                  {health.database?.status || 'unknown'}
+                  {health.database?.status === 'connected' && health.database?.latency > 0 && (
+                    <span className="text-muted-foreground ml-1">({health.database.latency}ms)</span>
+                  )}
+                </span>
+              </div>
+            </div>
+
             <div className="flex justify-between">
               <span className="text-muted-foreground">Uptime:</span>
               <span className="font-medium">
