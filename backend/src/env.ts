@@ -26,6 +26,16 @@ const backendEnvSchema = z.object({
 
   // CORS origins (comma-separated for production)
   CORS_ORIGINS: z.string().optional(),
+
+  // Rate limiting configuration
+  RATE_LIMIT_MAX: z
+    .string()
+    .transform((s) => (s ? parseInt(s, 10) : undefined))
+    .optional(),
+  RATE_LIMIT_WINDOW_MS: z
+    .string()
+    .transform((s) => (s ? parseInt(s, 10) : undefined))
+    .optional(),
 })
 
 // Validate backend-specific environment variables

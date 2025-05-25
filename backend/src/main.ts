@@ -35,7 +35,7 @@ async function bootstrap() {
   logger.log(`🚀 Backend server is running on: ${BackendEnv.BACKEND_URL}`)
   logger.log(`⚡ Using Fastify for high performance`)
   logger.log(`🌍 Environment: ${BackendEnv.NODE_ENV}`)
-  logger.log(`🗄️ Database: ${BackendEnv.DATABASE_URL.split('@')[1] || 'configured'}`) // Hide credentials
+  logger.log(`🗄️  Database: ${BackendEnv.DATABASE_URL.split('@')[1] || 'configured'}`) // Hide credentials
   logger.log(`🔒 CORS enabled for frontend origins`)
   logger.log(`🛡️  Security headers enabled with Helmet`)
   logger.log(`📚 API Documentation: ${BackendEnv.BACKEND_URL}/api/docs`)

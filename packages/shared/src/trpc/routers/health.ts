@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { z } from 'zod'
 import { router, publicProcedure } from '../trpc.ts'
+import { publicProcedureWithMiddleware, rateLimitedProcedure } from '../middleware.ts'
 
 /**
  * Health Router - tRPC procedures for system health and connectivity testing
@@ -30,7 +31,7 @@ export const healthRouter = router({
    * console.log(health.status) // 'ok'
    * ```
    */
-  check: publicProcedure.query(async () => {
+  check: publicProcedureWithMiddleware.query(async () => {
     const memoryUsage = process.memoryUsage()
 
     return {
@@ -92,7 +93,7 @@ export const healthRouter = router({
    * console.log(slowPong.message) // "🏓 Pong from tRPC server!"
    * ```
    */
-  ping: publicProcedure
+  ping: rateLimitedProcedure
     .input(
       z.object({
         delay: z.number().min(0).max(5000).optional(),
