@@ -21,8 +21,27 @@ module.exports = {
       },
     ],
   },
-  collectCoverageFrom: ['**/*.(t|j)s'],
+  collectCoverageFrom: [
+    '**/*.(t|j)s',
+    '!**/*.spec.ts',
+    '!**/*.e2e-spec.ts',
+    '!**/node_modules/**',
+    '!**/dist/**',
+    '!**/coverage/**',
+    '!**/*.d.ts',
+    '!**/test-setup.ts',
+    '!**/main.ts',
+  ],
   coverageDirectory: '../coverage',
+  coverageReporters: ['text', 'lcov', 'html', 'json'],
+  coverageThreshold: {
+    global: {
+      branches: 40,
+      functions: 45,
+      lines: 55,
+      statements: 55,
+    },
+  },
   testEnvironment: 'node',
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/$1',

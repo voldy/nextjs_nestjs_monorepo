@@ -49,12 +49,15 @@ export function PingButton() {
           ))}
         </div>
 
-        <Button onClick={handlePing} disabled={isLoading} className="w-full">
+        <Button onClick={handlePing} disabled={isLoading} className="w-full" data-testid="ping-button">
           {isLoading ? 'Pinging...' : '🏓 Ping Server'}
         </Button>
 
         {pingResult && (
-          <div className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800 dark:border-green-800 dark:bg-green-900/20 dark:text-green-200">
+          <div
+            className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800 dark:border-green-800 dark:bg-green-900/20 dark:text-green-200"
+            data-testid="ping-result"
+          >
             <p className="font-semibold">{pingResult.message}</p>
             <p className="text-xs opacity-75">
               Delay: {pingResult.delay}ms • {new Date(pingResult.timestamp).toLocaleTimeString()}

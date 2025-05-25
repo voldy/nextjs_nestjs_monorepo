@@ -59,6 +59,9 @@ out
 # Testing
 test-output
 coverage
+playwright-report
+test-results
+junit-results.xml
 
 # SWC build artifacts and plugins
 **/.swc/

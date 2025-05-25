@@ -1,0 +1,35 @@
+{
+  "name": "e2e-tests",
+  "projectType": "application",
+  "sourceRoot": "e2e-tests/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "e2e-tests/playwright.config.ts"
+      }
+    },
+    "e2e:ui": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "e2e-tests/playwright.config.ts",
+        "ui": true
+      }
+    },
+    "e2e:headed": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "e2e-tests/playwright.config.ts",
+        "headed": true
+      }
+    },
+    "e2e:debug": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "e2e-tests/playwright.config.ts",
+        "debug": true
+      }
+    }
+  },
+  "tags": ["scope:e2e", "type:test"]
+}

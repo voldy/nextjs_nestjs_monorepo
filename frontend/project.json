@@ -24,17 +24,28 @@
       "options": {
         "buildTarget": "frontend:build",
         "dev": true,
-        "turbo": true
+        "turbo": true,
+        "port": 4200
       },
       "configurations": {
         "development": {
           "buildTarget": "frontend:build:development",
           "dev": true,
-          "turbo": true
+          "turbo": true,
+          "port": 4200
         },
         "production": {
           "buildTarget": "frontend:build:production",
           "dev": false
+        },
+        "e2e": {
+          "buildTarget": "frontend:build:development",
+          "dev": true,
+          "turbo": true,
+          "port": 4201,
+          "env": {
+            "BACKEND_PORT": "3001"
+          }
         }
       }
     },

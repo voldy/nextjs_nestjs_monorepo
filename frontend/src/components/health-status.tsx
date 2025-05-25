@@ -99,6 +99,7 @@ export function HealthStatus() {
                       ? 'text-yellow-600'
                       : 'text-red-600'
                 }`}
+                data-testid="health-status"
               >
                 {health.status}
               </span>
@@ -137,7 +138,14 @@ export function HealthStatus() {
           </div>
         )}
 
-        <Button variant="outline" size="sm" onClick={refetch} disabled={isLoading} className="w-full">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={refetch}
+          disabled={isLoading}
+          className="w-full"
+          data-testid="health-check"
+        >
           {isLoading ? 'Checking...' : 'Refresh'}
         </Button>
       </CardContent>

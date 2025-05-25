@@ -354,6 +354,8 @@ nx reset
 - **Integration**: Factory consistency validation across contexts
 - **E2E**: Playwright for end-to-end testing
 
+**Port Configuration**: E2E tests use different ports (backend: 3001, frontend: 4201) to avoid conflicts with development servers running on the default ports (3000, 4200).
+
 ### Factory-Based Testing
 
 Our testing uses dynamic factories for realistic, consistent test data:
@@ -397,8 +399,14 @@ nx test frontend --watch
 nx test frontend --coverage
 nx test backend --coverage
 
-# Run E2E tests
-nx e2e frontend-e2e
+# Run E2E tests (uses ports 3001/4201 to avoid conflicts)
+pnpm test:e2e
+
+# Run E2E tests with UI
+pnpm test:e2e:ui
+
+# Run E2E tests in headed mode (see browser)
+pnpm test:e2e:headed
 
 # Run integration tests specifically
 nx test frontend --testPathPattern=integration

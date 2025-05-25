@@ -1,0 +1,1218 @@
+{
+  "config": {
+    "configFile": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/playwright.config.ts",
+    "rootDir": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 6
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "junit-results.xml"
+        }
+      ],
+      ["list", null]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "api-tests",
+        "name": "api-tests",
+        "testDir": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src",
+        "testIgnore": [],
+        "testMatch": ["**/api/**/*.spec.ts"],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.52.0",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "api/health.spec.ts",
+      "file": "api/health.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Backend API Health",
+          "file": "api/health.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should return health status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 64,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.449Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-7996724755649a98269c",
+              "file": "api/health.spec.ts",
+              "line": 6,
+              "column": 7
+            },
+            {
+              "title": "should return API documentation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 97,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.493Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-5d208f2faf7823628822",
+              "file": "api/health.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "should handle tRPC health check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 110,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.500Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-198aa4f96387305cb875",
+              "file": "api/health.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "should handle tRPC ping",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 73,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.449Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-ec35246b6939ad3d2899",
+              "file": "api/health.spec.ts",
+              "line": 40,
+              "column": 7
+            },
+            {
+              "title": "should handle CORS headers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 79,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.534Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-a974a2b24df9d2a1ff1d",
+              "file": "api/health.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should handle rate limiting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 259,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.433Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-a3dcb7dd830c78e6f932",
+              "file": "api/health.spec.ts",
+              "line": 72,
+              "column": 7
+            },
+            {
+              "title": "should return health status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 122,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:29.789Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-e55f0c060f02792cf366",
+              "file": "api/health.spec.ts",
+              "line": 6,
+              "column": 7
+            },
+            {
+              "title": "should return API documentation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 69,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:31.301Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-1f3cd255ac00ebabe06c",
+              "file": "api/health.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "should handle tRPC health check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 70,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:31.419Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-b12537462b0ed760e159",
+              "file": "api/health.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "should handle tRPC ping",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 15,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:29.923Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-24c5ff5b8b587d696011",
+              "file": "api/health.spec.ts",
+              "line": 40,
+              "column": 7
+            },
+            {
+              "title": "should handle CORS headers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 12,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:29.942Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-2bf8d0630eb0af90c992",
+              "file": "api/health.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should handle rate limiting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "api-tests",
+                  "projectName": "api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 315,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:29.957Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d773548c0867c4bfdbac-f5ba008c953051777f77",
+              "file": "api/health.spec.ts",
+              "line": 72,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "frontend/app.spec.ts",
+      "file": "frontend/app.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Frontend Application",
+          "file": "frontend/app.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load the homepage",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 4583,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:19:40",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                          "column": 40,
+                          "line": 19
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 17 |\u001b[39m\n \u001b[90m 18 |\u001b[39m     \u001b[90m// Check main content is visible\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 19 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'main'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\n \u001b[90m    |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 20 |\u001b[39m\n \u001b[90m 21 |\u001b[39m     \u001b[90m// Take screenshot for visual regression\u001b[39m\n \u001b[90m 22 |\u001b[39m     \u001b[36mawait\u001b[39m helpers\u001b[33m.\u001b[39mtakeScreenshot(\u001b[32m'homepage'\u001b[39m)\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                            "column": 40,
+                            "line": 19
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n\n\n\u001b[0m \u001b[90m 17 |\u001b[39m\n \u001b[90m 18 |\u001b[39m     \u001b[90m// Check main content is visible\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 19 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'main'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\n \u001b[90m    |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 20 |\u001b[39m\n \u001b[90m 21 |\u001b[39m     \u001b[90m// Take screenshot for visual regression\u001b[39m\n \u001b[90m 22 |\u001b[39m     \u001b[36mawait\u001b[39m helpers\u001b[33m.\u001b[39mtakeScreenshot(\u001b[32m'homepage'\u001b[39m)\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:19:40\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.531Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Application-should-load-the-homepage-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Application-should-load-the-homepage-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Application-should-load-the-homepage-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                        "column": 40,
+                        "line": 19
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b7ae0df2492dbb582bd6-5a0392108e578203971a",
+              "file": "frontend/app.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "should display tRPC health status",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 31208,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/utils/test-helpers.ts",
+                            "column": 21,
+                            "line": 71
+                          },
+                          "message": "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n\u001b[90m   at \u001b[39mutils/test-helpers.ts:71\n\n\u001b[0m \u001b[90m 69 |\u001b[39m \u001b[90m   */\u001b[39m\n \u001b[90m 70 |\u001b[39m   \u001b[36masync\u001b[39m waitForTrpcCall(procedure\u001b[33m:\u001b[39m string) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 71 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForResponse(\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 72 |\u001b[39m       (response) \u001b[33m=>\u001b[39m response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(\u001b[32m'/api/trpc'\u001b[39m) \u001b[33m&&\u001b[39m response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(procedure)\u001b[33m,\u001b[39m\n \u001b[90m 73 |\u001b[39m     )\n \u001b[90m 74 |\u001b[39m   }\u001b[0m\n\u001b[2m    at TestHelpers.waitForTrpcCall (/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/utils/test-helpers.ts:71:21)\u001b[22m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:34:21\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.559Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-664fe--display-tRPC-health-status-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-664fe--display-tRPC-health-status-chromium/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b7ae0df2492dbb582bd6-d7419b089e3c060968a3",
+              "file": "frontend/app.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "should handle tRPC ping functionality",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 31174,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/utils/test-helpers.ts",
+                            "column": 21,
+                            "line": 71
+                          },
+                          "message": "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n\u001b[90m   at \u001b[39mutils/test-helpers.ts:71\n\n\u001b[0m \u001b[90m 69 |\u001b[39m \u001b[90m   */\u001b[39m\n \u001b[90m 70 |\u001b[39m   \u001b[36masync\u001b[39m waitForTrpcCall(procedure\u001b[33m:\u001b[39m string) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 71 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForResponse(\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 72 |\u001b[39m       (response) \u001b[33m=>\u001b[39m response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(\u001b[32m'/api/trpc'\u001b[39m) \u001b[33m&&\u001b[39m response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(procedure)\u001b[33m,\u001b[39m\n \u001b[90m 73 |\u001b[39m     )\n \u001b[90m 74 |\u001b[39m   }\u001b[0m\n\u001b[2m    at TestHelpers.waitForTrpcCall (/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/utils/test-helpers.ts:71:21)\u001b[22m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:50:21\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.616Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-b019a-dle-tRPC-ping-functionality-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-b019a-dle-tRPC-ping-functionality-chromium/video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b7ae0df2492dbb582bd6-00a86d51d17ea2c12d7c",
+              "file": "frontend/app.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 4769,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:63:40",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                          "column": 40,
+                          "line": 63
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 61 |\u001b[39m\n \u001b[90m 62 |\u001b[39m     \u001b[90m// Check mobile layout\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'main'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\n \u001b[90m    |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 64 |\u001b[39m\n \u001b[90m 65 |\u001b[39m     \u001b[90m// Take mobile screenshot\u001b[39m\n \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m helpers\u001b[33m.\u001b[39mtakeScreenshot(\u001b[32m'homepage-mobile'\u001b[39m)\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                            "column": 40,
+                            "line": 63
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('main') resolved to 2 elements:\n    1) <main>…</main> aka getByRole('main').first()\n    2) <main class=\"row-start-2 flex flex-col items-center gap-[32px] sm:items-start\">…</main> aka getByRole('main').nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('main')\u001b[22m\n\n\n\u001b[0m \u001b[90m 61 |\u001b[39m\n \u001b[90m 62 |\u001b[39m     \u001b[90m// Check mobile layout\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'main'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\n \u001b[90m    |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 64 |\u001b[39m\n \u001b[90m 65 |\u001b[39m     \u001b[90m// Take mobile screenshot\u001b[39m\n \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m helpers\u001b[33m.\u001b[39mtakeScreenshot(\u001b[32m'homepage-mobile'\u001b[39m)\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts:63:40\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.625Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-d615c-uld-be-responsive-on-mobile-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-d615c-uld-be-responsive-on-mobile-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/frontend-app-Frontend-Appl-d615c-uld-be-responsive-on-mobile-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/frontend/app.spec.ts",
+                        "column": 40,
+                        "line": 63
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b7ae0df2492dbb582bd6-638d724243040f919b0f",
+              "file": "frontend/app.spec.ts",
+              "line": 57,
+              "column": 7
+            },
+            {
+              "title": "should handle navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 5395,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.640Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7ae0df2492dbb582bd6-bd3c60926941285ad0a7",
+              "file": "frontend/app.spec.ts",
+              "line": 69,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "integration/health-integration.spec.ts",
+      "file": "integration/health-integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Health System Integration",
+          "file": "integration/health-integration.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "ping-pong: complete round-trip test",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "failed",
+                      "duration": 5125,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:50:32",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                          "column": 32,
+                          "line": 50
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 48 |\u001b[39m\n \u001b[90m 49 |\u001b[39m     \u001b[90m// Verify the ping was successful\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 50 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m    |\u001b[39m                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 51 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'pong'\u001b[39m\u001b[33m,\u001b[39m \u001b[36mtrue\u001b[39m)\n \u001b[90m 52 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'delay'\u001b[39m\u001b[33m,\u001b[39m \u001b[35m100\u001b[39m)\n \u001b[90m 53 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'timestamp'\u001b[39m)\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                            "column": 32,
+                            "line": 50
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 48 |\u001b[39m\n \u001b[90m 49 |\u001b[39m     \u001b[90m// Verify the ping was successful\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 50 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m    |\u001b[39m                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 51 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'pong'\u001b[39m\u001b[33m,\u001b[39m \u001b[36mtrue\u001b[39m)\n \u001b[90m 52 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'delay'\u001b[39m\u001b[33m,\u001b[39m \u001b[35m100\u001b[39m)\n \u001b[90m 53 |\u001b[39m     expect(pingResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'timestamp'\u001b[39m)\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:50:32\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:15.732Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-8028d-ng-complete-round-trip-test-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-8028d-ng-complete-round-trip-test-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-8028d-ng-complete-round-trip-test-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                        "column": 32,
+                        "line": 50
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-5e429a57d96cbbfbac04",
+              "file": "integration/health-integration.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "health check: system status verification",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 1743,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:21.605Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-1f6ed96dc1d6a5c0bf44",
+              "file": "integration/health-integration.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "echo: data integrity verification",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2953,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:136:32",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                          "column": 32,
+                          "line": 136
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 134 |\u001b[39m\n \u001b[90m 135 |\u001b[39m     \u001b[90m// Verify echo response\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 136 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 137 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'echo'\u001b[39m\u001b[33m,\u001b[39m testMessage)\n \u001b[90m 138 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'timestamp'\u001b[39m)\n \u001b[90m 139 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                            "column": 32,
+                            "line": 136
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 134 |\u001b[39m\n \u001b[90m 135 |\u001b[39m     \u001b[90m// Verify echo response\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 136 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 137 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'echo'\u001b[39m\u001b[33m,\u001b[39m testMessage)\n \u001b[90m 138 |\u001b[39m     expect(echoResult\u001b[33m.\u001b[39mdata)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m'timestamp'\u001b[39m)\n \u001b[90m 139 |\u001b[39m\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:136:32\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:25.408Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-5b936-data-integrity-verification-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-5b936-data-integrity-verification-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-5b936-data-integrity-verification-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                        "column": 32,
+                        "line": 136
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-54999307645bc1b8c086",
+              "file": "integration/health-integration.spec.ts",
+              "line": 105,
+              "column": 7
+            },
+            {
+              "title": "rate limiting: verify protection mechanisms",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 3741,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:190:48",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                          "column": 48,
+                          "line": 190
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 188 |\u001b[39m\n \u001b[90m 189 |\u001b[39m     \u001b[90m// Verify that some requests succeeded\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 190 |\u001b[39m     expect(rateLimitResult\u001b[33m.\u001b[39msuccessfulRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\n \u001b[90m     |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 191 |\u001b[39m\n \u001b[90m 192 |\u001b[39m     \u001b[90m// Verify that rate limiting eventually kicked in\u001b[39m\n \u001b[90m 193 |\u001b[39m     expect(rateLimitResult\u001b[33m.\u001b[39mrateLimitedRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                            "column": 48,
+                            "line": 190
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n\u001b[0m \u001b[90m 188 |\u001b[39m\n \u001b[90m 189 |\u001b[39m     \u001b[90m// Verify that some requests succeeded\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 190 |\u001b[39m     expect(rateLimitResult\u001b[33m.\u001b[39msuccessfulRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\n \u001b[90m     |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 191 |\u001b[39m\n \u001b[90m 192 |\u001b[39m     \u001b[90m// Verify that rate limiting eventually kicked in\u001b[39m\n \u001b[90m 193 |\u001b[39m     expect(rateLimitResult\u001b[33m.\u001b[39mrateLimitedRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:190:48\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:25.662Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-f65ee-erify-protection-mechanisms-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-f65ee-erify-protection-mechanisms-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-f65ee-erify-protection-mechanisms-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                        "column": 48,
+                        "line": 190
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-8f1143374fbd6e3d2099",
+              "file": "integration/health-integration.spec.ts",
+              "line": 147,
+              "column": 7
+            },
+            {
+              "title": "error handling: invalid requests",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 3358,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:25.624Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-7bb731f6db010f702958",
+              "file": "integration/health-integration.spec.ts",
+              "line": 199,
+              "column": 7
+            },
+            {
+              "title": "concurrent requests: system stability",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 1735,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m10\u001b[39m\nReceived:   \u001b[31m5\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m10\u001b[39m\nReceived:   \u001b[31m5\u001b[39m\n    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:341:49",
+                        "location": {
+                          "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                          "column": 49,
+                          "line": 341
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 339 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m 340 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39mtotalRequests)\u001b[33m.\u001b[39mtoBe(\u001b[35m15\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 341 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39msuccessfulRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m10\u001b[39m) \u001b[90m// Allow for some rate limiting\u001b[39m\n \u001b[90m     |\u001b[39m                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 342 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39mduration)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m10000\u001b[39m) \u001b[90m// Should complete within 10 seconds\u001b[39m\n \u001b[90m 343 |\u001b[39m   })\n \u001b[90m 344 |\u001b[39m })\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                            "column": 49,
+                            "line": 341
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m10\u001b[39m\nReceived:   \u001b[31m5\u001b[39m\n\n\u001b[0m \u001b[90m 339 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m 340 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39mtotalRequests)\u001b[33m.\u001b[39mtoBe(\u001b[35m15\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 341 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39msuccessfulRequests)\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m10\u001b[39m) \u001b[90m// Allow for some rate limiting\u001b[39m\n \u001b[90m     |\u001b[39m                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 342 |\u001b[39m     expect(concurrentResult\u001b[33m.\u001b[39mduration)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m10000\u001b[39m) \u001b[90m// Should complete within 10 seconds\u001b[39m\n \u001b[90m 343 |\u001b[39m   })\n \u001b[90m 344 |\u001b[39m })\u001b[0m\n\u001b[2m    at /Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts:341:49\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-05-25T23:37:23.356Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-c1fab-t-requests-system-stability-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-c1fab-t-requests-system-stability-chromium/video.webm"
+                        },
+                        {
+                          "name": "_error-context-0",
+                          "contentType": "text/markdown",
+                          "path": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/test-results/integration-health-integra-c1fab-t-requests-system-stability-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/voldy/code/bootstrap/next_nest_mono/e2e-tests/src/integration/health-integration.spec.ts",
+                        "column": 49,
+                        "line": 341
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "757c28241f576e8dc410-abcd2f0f5c13f952a674",
+              "file": "integration/health-integration.spec.ts",
+              "line": 280,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-05-25T23:37:13.549Z",
+    "duration": 33893.936,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

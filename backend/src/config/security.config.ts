@@ -7,6 +7,7 @@ export async function configureSecurity(app: NestFastifyApplication) {
   await app.register(fastifyCors, {
     origin: [
       'http://localhost:4200', // Next.js frontend (development)
+      'http://localhost:4201', // Next.js frontend (e2e testing)
       /^http:\/\/localhost:\d+$/, // Any localhost port for development
     ],
     credentials: true,
