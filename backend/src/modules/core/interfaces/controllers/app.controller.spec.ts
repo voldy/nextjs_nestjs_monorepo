@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { AppController } from './app.controller.ts'
-import { AppService } from './app.service.ts'
-import { PrismaService } from './prisma/prisma.service.ts'
+import { AppService } from '../../application/services/app.service.ts'
+import { PrismaService } from '../../infrastructure/database/prisma.service.ts'
 
 describe('AppController', () => {
   let appController: AppController
@@ -37,7 +37,7 @@ describe('AppController', () => {
 
   describe('health', () => {
     it('should return health check information with database status', async () => {
-      const result = await appController.simpleHealthCheck()
+      const result = (await appController.simpleHealthCheck()) as any
 
       expect(result).toHaveProperty('status', 'ok')
       expect(result).toHaveProperty('timestamp')
@@ -58,7 +58,7 @@ describe('AppController', () => {
       // Mock database failure
       jest.spyOn(prismaService, '$queryRaw').mockRejectedValue(new Error('Database connection failed'))
 
-      const result = await appController.simpleHealthCheck()
+      const result = (await appController.simpleHealthCheck()) as any
 
       expect(result).toHaveProperty('status', 'degraded')
       expect(result.database).toHaveProperty('status', 'error')
@@ -68,7 +68,7 @@ describe('AppController', () => {
 
   describe('tRPC health', () => {
     it('should return tRPC health check result', async () => {
-      const result = await appController.healthCheck()
+      const result = (await appController.healthCheck()) as any
       expect(result).toHaveProperty('result')
       expect(result.result).toHaveProperty('data')
     })

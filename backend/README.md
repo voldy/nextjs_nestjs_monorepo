@@ -155,34 +155,137 @@ From the root directory:
 
 ## 📁 Project Structure
 
+The backend follows a **Clean Architecture/DDD-inspired** modular structure with clear separation of concerns:
+
 ```
 backend/
 ├── src/
-│   ├── app.controller.ts       # Main application controller
-│   ├── app.controller.spec.ts  # Controller tests
-│   ├── app.module.ts           # Root application module
-│   ├── app.service.ts          # Main application service
-│   ├── prisma/                 # Prisma integration (service/module)
-│   │   ├── prisma.service.ts      # Prisma main service
-│   │   ├── prisma.module.ts       # Global Prisma module
-│   │   └── prisma-test.service.ts # Testing utilities
-│   ├── users/                  # User module, service, controller, tests
-│   └── test-utils/             # Database test utilities
-│       └── database-test.utils.ts
-│   └── main.ts                 # Application entry point
+│   ├── modules/
+│   │   └── core/                    # Core domain module
+│   │       ├── application/
+│   │       │   ├── services/        # Application services (UserService)
+│   │       │   └── use-cases/       # Use case implementations (business workflows)
+│   │       ├── domain/
+│   │       │   ├── entities/        # Domain entities (UserEntity)
+│   │       │   ├── value-objects/   # Value objects (immutable domain concepts)
+│   │       │   └── repositories/    # Repository interfaces
+│   │       ├── infrastructure/
+│   │       │   ├── database/        # Database services (PrismaService)
+│   │       │   └── repositories/    # Repository implementations
+│   │       ├── interfaces/
+│   │       │   ├── controllers/     # REST controllers
+│   │       │   ├── dto/            # Data Transfer Objects
+│   │       │   └── trpc/           # tRPC endpoints
+│   │       └── core.module.ts       # Domain module definition
+│   ├── config/                      # Global configuration
+│   ├── app.module.ts               # Root application module
+│   ├── app.service.ts              # Main application service
+│   ├── env.ts                      # Environment configuration
+│   └── main.ts                     # Application entry point
+├── docs/
+│   └── domains.md                  # Domain architecture guide
 ├── prisma/
-│   ├── schema.prisma           # Database schema
-│   └── seed.ts                 # Database seeding script
+│   ├── schema.prisma               # Database schema
+│   └── seed.ts                     # Database seeding script
 ├── test/
-│   ├── app.e2e-spec.ts         # End-to-end tests
-│   └── jest-e2e.json           # E2E test configuration
-├── dist/                       # Compiled output (after build)
-├── project.json                # Nx project configuration
-├── tsconfig.json               # TypeScript configuration
-├── jest.config.js              # Jest test configuration
-├── nest-cli.json               # NestJS CLI configuration
+│   ├── app.e2e-spec.ts             # End-to-end tests
+│   └── jest-e2e.json               # E2E test configuration
+├── dist/                           # Compiled output (after build)
+├── project.json                    # Nx project configuration
+├── tsconfig.json                   # TypeScript configuration
+├── jest.config.js                  # Jest test configuration
+├── nest-cli.json                   # NestJS CLI configuration
 └── README.md
 ```
+
+### Domain Architecture
+
+The backend is organized into **domain modules** following Clean Architecture principles:
+
+- **Domain Layer**: Pure business logic, entities, value objects, and repository interfaces
+- **Application Layer**: Use cases and application services that orchestrate business workflows
+- **Infrastructure Layer**: Database implementations and external integrations
+- **Interfaces Layer**: Controllers, DTOs, and API endpoints
+
+#### Layer Components
+
+**Domain Layer:**
+
+- **Entities**: Rich domain objects with business logic and behavior (e.g., `UserEntity`)
+- **Value Objects**: Immutable objects representing domain concepts (e.g., `Email`, `Money`, `Address`)
+- **Repository Interfaces**: Contracts for data access without implementation details
+
+**Application Layer:**
+
+- **Services**: Coordinate multiple entities and orchestrate complex business operations
+- **Use Cases**: Single-purpose business workflows that implement specific user stories (e.g., `CreateUserUseCase`, `UpdateUserProfileUseCase`)
+
+**Infrastructure Layer:**
+
+- **Repository Implementations**: Concrete data access using Prisma, APIs, or other data sources
+- **Database Services**: Database connection and configuration management
+
+**Interfaces Layer:**
+
+- **Controllers**: HTTP endpoints and request/response handling
+- **DTOs**: Data transfer objects for API communication
+- **tRPC Endpoints**: Type-safe API procedures
+
+#### Use Cases vs Services
+
+- **Use Cases**: Single responsibility, specific business workflows (e.g., "Register New User", "Change Password")
+- **Services**: Coordinate multiple use cases or provide shared business logic across use cases
+
+#### Value Objects
+
+Value objects represent domain concepts that are:
+
+- **Immutable**: Cannot be changed after creation
+- **Equality by value**: Two value objects are equal if their values are equal
+- **Self-validating**: Ensure they always contain valid data
+
+Examples:
+
+```typescript
+// Email value object
+class Email {
+  constructor(private readonly value: string) {
+    if (!this.isValid(value)) {
+      throw new Error('Invalid email format')
+    }
+  }
+
+  getValue(): string {
+    return this.value
+  }
+  private isValid(email: string): boolean {
+    /* validation */
+  }
+}
+
+// Money value object
+class Money {
+  constructor(
+    private readonly amount: number,
+    private readonly currency: string,
+  ) {
+    if (amount < 0) throw new Error('Amount cannot be negative')
+  }
+
+  add(other: Money): Money {
+    if (this.currency !== other.currency) {
+      throw new Error('Cannot add different currencies')
+    }
+    return new Money(this.amount + other.amount, this.currency)
+  }
+}
+```
+
+**Current Domains:**
+
+- **Core**: User management, health checks, and system operations
+
+For detailed information about the domain architecture, see [`docs/domains.md`](./docs/domains.md).
 
 ---
 
@@ -484,30 +587,59 @@ export class UsersController {
 
 ## 🚀 Common Development Tasks
 
-### Adding a New Feature Module
+### Adding a New Domain Module
 
-1. **Generate the module:**
+The backend follows a domain-driven architecture. To add a new domain:
 
-   ```bash
-   cd backend
-   nest generate module features/users
-   ```
-
-2. **Add controller and service:**
+1. **Create the domain structure:**
 
    ```bash
-   nest generate controller features/users
-   nest generate service features/users
+   mkdir -p backend/src/modules/{domain-name}/{application,domain,infrastructure,interfaces}
+   mkdir -p backend/src/modules/{domain-name}/application/{services,use-cases}
+   mkdir -p backend/src/modules/{domain-name}/domain/{entities,value-objects,repositories}
+   mkdir -p backend/src/modules/{domain-name}/infrastructure/{database,repositories}
+   mkdir -p backend/src/modules/{domain-name}/interfaces/{controllers,dto,trpc}
    ```
 
-3. **Import in AppModule:**
+2. **Create the domain module:**
+
+   ```typescript
+   // backend/src/modules/{domain-name}/{domain-name}.module.ts
+   import { Module } from '@nestjs/common'
+   import { PrismaModule } from '../core/infrastructure/database/prisma.module'
+
+   @Module({
+     imports: [PrismaModule],
+     controllers: [
+       /* your controllers */
+     ],
+     providers: [
+       /* your services and repositories */
+     ],
+     exports: [
+       /* services to export */
+     ],
+   })
+   export class YourDomainModule {}
+   ```
+
+3. **Register in AppModule:**
+
    ```typescript
    @Module({
-     imports: [UsersModule],
+     imports: [CoreModule, YourDomainModule],
      // ...
    })
    export class AppModule {}
    ```
+
+4. **Follow the layer structure:**
+   - **Domain**: Entities, value objects, repository interfaces
+   - **Application**: Services and use cases
+   - **Infrastructure**: Repository implementations, database access
+   - **Interfaces**: Controllers, DTOs, API endpoints
+
+For detailed guidelines, see [`docs/domains.md`](./docs/domains.md).
 
 ### Adding Database Integration
 

@@ -1,4 +1,4 @@
-import { BackendEnv } from './env.js'
+import { BackendEnv } from '../../../../env.js'
 import { logger } from '@shared'
 import { Injectable } from '@nestjs/common'
 

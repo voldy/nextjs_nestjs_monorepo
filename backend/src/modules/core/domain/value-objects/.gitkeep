@@ -1,0 +1,2 @@
+# This file ensures the value-objects directory is tracked by Git
+# Value objects will be implemented here as domain complexity grows 

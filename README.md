@@ -31,7 +31,7 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 ## 🚀 Tech Stack
 
 - **Frontend**: Next.js 15, React 19, Tailwind CSS, shadcn/ui
-- **Backend**: NestJS 11, Node.js, TypeScript, Fastify
+- **Backend**: NestJS 11, Node.js, TypeScript, Fastify, Clean Architecture/DDD structure
 - **Shared Package**: TypeScript utilities library with environment validation (Zod)
 - **Monorepo**: Nx 21.x for task orchestration and caching
 - **Package Manager**: pnpm for fast, efficient dependency management
@@ -53,11 +53,13 @@ A modern full-stack monorepo powered by [Nx](https://nx.dev) and [pnpm](https://
 │   │   └── lib/         # Utilities and helpers
 │   ├── project.json     # Nx project configuration
 │   └── README.md
-├── backend/              # NestJS 11 API server
+├── backend/              # NestJS 11 API server (Clean Architecture/DDD)
 │   ├── src/
+│   │   ├── modules/     # Domain modules (core, etc.)
+│   │   ├── config/      # Global configuration
 │   │   ├── app.module.ts
-│   │   ├── app.controller.ts
 │   │   └── main.ts
+│   ├── docs/            # Domain architecture documentation
 │   ├── test/            # End-to-end tests
 │   ├── project.json     # Nx project configuration
 │   └── README.md
@@ -117,6 +119,41 @@ const merged = deepMerge(defaultConfig, userConfig)
 ```
 
 See [`packages/shared/README.md`](packages/shared/README.md) for detailed documentation.
+
+---
+
+## 🏗️ Backend Architecture
+
+The backend follows a **Clean Architecture/Domain-Driven Design (DDD)** approach with modular domain organization:
+
+### Domain Structure
+
+```
+backend/src/modules/
+└── core/                    # Core domain (users, health, system)
+    ├── application/         # Use cases and application services
+    ├── domain/             # Business entities and repository interfaces
+    ├── infrastructure/     # Database implementations and external services
+    └── interfaces/         # Controllers, DTOs, and API endpoints
+```
+
+### Key Principles
+
+- **Domain Isolation**: Each domain is self-contained with clear boundaries
+- **Dependency Inversion**: Domain layer has no dependencies on infrastructure
+- **Interface Segregation**: Repository interfaces defined in domain layer
+- **Single Responsibility**: Each layer has a specific purpose and responsibility
+
+### Adding New Domains
+
+1. Create domain structure following the established pattern
+2. Implement domain entities with business logic
+3. Define repository interfaces in domain layer
+4. Implement repositories in infrastructure layer
+5. Create application services for use cases
+6. Add controllers and DTOs in interfaces layer
+
+For detailed guidelines, see [`backend/docs/domains.md`](backend/docs/domains.md).
 
 ---
 
