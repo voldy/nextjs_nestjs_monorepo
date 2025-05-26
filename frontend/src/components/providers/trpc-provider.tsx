@@ -4,9 +4,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink, loggerLink } from '@trpc/client'
 import { useState, type ReactNode } from 'react'
 import superjson from 'superjson'
+import { useAuth } from '@clerk/nextjs'
 import { trpc } from '../../lib/trpc'
 
 export function TrpcProvider({ children }: { children: ReactNode }) {
+  const { getToken } = useAuth()
+
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -45,6 +48,13 @@ export function TrpcProvider({ children }: { children: ReactNode }) {
         httpBatchLink({
           url: '/api/trpc',
           transformer: superjson,
+          // Add authentication headers
+          headers: async () => {
+            const token = await getToken()
+            return {
+              authorization: token ? `Bearer ${token}` : '',
+            }
+          },
           // Add timeout and error handling
           fetch: (url, options) => {
             const controller = new AbortController()

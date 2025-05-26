@@ -2,6 +2,7 @@ import React from 'react'
 import { render, type RenderOptions, type RenderResult } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import userEvent from '@testing-library/user-event'
+import { ClerkProvider } from '@clerk/nextjs'
 
 // Create a test-optimized QueryClient
 function createTestQueryClient() {
@@ -34,7 +35,11 @@ export function renderWithProviders(
   const user = userEvent.setup()
 
   function Wrapper({ children }: { children: React.ReactNode }) {
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    return (
+      <ClerkProvider>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      </ClerkProvider>
+    )
   }
 
   return {

@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 import { BellRing, Check } from 'lucide-react'
@@ -9,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Switch } from '@/components/ui/switch'
 import { PingButton } from '@/components/ping-button'
 import { HealthStatus } from '@/components/health-status'
+import { AuthStatus } from '@/components/auth-status'
 
 // Import from shared package
 import { isBrowser } from '@shared'
@@ -112,6 +114,34 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <h4 className="text-md mb-4 font-medium">Ping Test</h4>
               <PingButton />
+            </div>
+          </div>
+        </div>
+
+        {/* Authentication Demo */}
+        <div className="bg-card text-card-foreground w-full max-w-4xl rounded-lg border p-6 shadow-sm">
+          <h3 className="mb-4 text-lg font-semibold">Authentication with Clerk</h3>
+          <p className="text-muted-foreground mb-6 text-sm">
+            Secure authentication and user management powered by Clerk.
+          </p>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* Auth Status */}
+            <div className="flex flex-col">
+              <AuthStatus />
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex flex-col items-center justify-center gap-4">
+              <Link href="/dashboard">
+                <Button variant="default">Go to Dashboard</Button>
+              </Link>
+              <Link href="/sign-in">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button variant="outline">Sign Up</Button>
+              </Link>
             </div>
           </div>
         </div>

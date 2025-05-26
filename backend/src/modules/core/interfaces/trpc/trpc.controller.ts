@@ -1,6 +1,8 @@
 import { Controller, All, Req, Res } from '@nestjs/common'
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch'
 import { appRouter } from '@shared'
+import { verifyToken } from '@clerk/backend'
+import { BackendEnv } from '../../../../env.ts'
 
 @Controller('trpc')
 export class TrpcController {
@@ -30,16 +32,45 @@ export class TrpcController {
         body,
       })
 
+      // Extract user from JWT token if present
+      const extractUser = async () => {
+        try {
+          const authHeader = req.headers.authorization
+          if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return undefined
+          }
+
+          const token = authHeader.split(' ')[1]
+          if (!token || !BackendEnv.CLERK_SECRET_KEY) {
+            return undefined
+          }
+
+          // Use Clerk's official verification method
+          const payload = await verifyToken(token, {
+            secretKey: BackendEnv.CLERK_SECRET_KEY,
+          })
+
+          return {
+            id: payload.sub,
+            email: payload.email as string | undefined,
+          }
+        } catch {
+          // Silent fail for invalid tokens
+          return undefined
+        }
+      }
+
       // Handle the request with tRPC (with timeout)
       const response = (await Promise.race([
         fetchRequestHandler({
           endpoint: '/api/trpc',
           req: fetchRequest,
           router: appRouter,
-          createContext: () => ({
+          createContext: async () => ({
             // Add your context here (user, database, etc.)
             req,
             res,
+            user: await extractUser(),
           }),
         }),
         timeoutPromise,

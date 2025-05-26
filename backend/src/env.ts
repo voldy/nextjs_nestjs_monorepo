@@ -24,6 +24,9 @@ const backendEnvSchema = z.object({
   // (Optional) API keys for backend services
   // API_KEY: z.string().optional(),
 
+  // Clerk authentication
+  CLERK_SECRET_KEY: z.string().optional(),
+
   // CORS origins (comma-separated for production)
   CORS_ORIGINS: z.string().optional(),
 

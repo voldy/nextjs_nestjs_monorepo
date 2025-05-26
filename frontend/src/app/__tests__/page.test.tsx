@@ -21,6 +21,11 @@ jest.mock('../../lib/trpc', () => ({
         useQuery: jest.fn(),
       },
     },
+    auth: {
+      me: {
+        useQuery: jest.fn(),
+      },
+    },
   },
 }))
 
@@ -29,6 +34,7 @@ const mockUseApi = useApi as jest.MockedFunction<any>
 
 import { trpc } from '../../lib/trpc'
 const mockTrpcPing = trpc.health.ping.useQuery as jest.MockedFunction<any>
+const mockTrpcAuth = trpc.auth.me.useQuery as jest.MockedFunction<any>
 
 describe('Home page', () => {
   beforeEach(() => {
@@ -36,6 +42,14 @@ describe('Home page', () => {
 
     // Mock tRPC ping hook to return a default state
     mockTrpcPing.mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: null,
+      refetch: jest.fn(),
+    })
+
+    // Mock tRPC auth hook to return a default state
+    mockTrpcAuth.mockReturnValue({
       data: undefined,
       isLoading: false,
       error: null,

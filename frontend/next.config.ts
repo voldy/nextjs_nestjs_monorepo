@@ -7,11 +7,6 @@ const isE2E = process.env.PORT === '4201' || process.env.NODE_ENV === 'test'
 const backendPort = process.env.BACKEND_PORT || (isE2E ? '3001' : '3000')
 const backendUrl = `${backendHost}:${backendPort}`
 
-// Log configuration for debugging
-console.log(
-  `[Next.js Config] PORT: ${process.env.PORT}, BACKEND_PORT: ${process.env.BACKEND_PORT}, isE2E: ${isE2E}, backendUrl: ${backendUrl}`,
-)
-
 const nextConfig: NextConfig = {
   nx: {
     svgr: false,
