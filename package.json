@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "nx run-many -t eslint:lint",
-    "prepare": "husky",
+    "prepare": "command -v husky >/dev/null 2>&1 && husky || echo 'Husky not found, skipping git hooks setup'",
     "test": "nx run-many -t test",
     "test:backend": "nx test backend",
     "test:frontend": "nx test frontend",
