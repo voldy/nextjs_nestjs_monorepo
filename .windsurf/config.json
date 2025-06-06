@@ -1,0 +1,136 @@
+{
+  "project": {
+    "name": "next_nest_mono",
+    "description": "TypeScript fullstack monorepo template with Next.js and NestJS",
+    "stack": {
+      "monorepo": "Nx with pnpm workspaces",
+      "frontend": "Next.js 15 (App Router), Tailwind CSS, shadcn/ui, Clerk auth, React Hook Form + Zod",
+      "backend": "NestJS, Prisma ORM, BullMQ, tRPC",
+      "database": "PostgreSQL via Supabase",
+      "deployment": {
+        "frontend": "Vercel",
+        "backend": "Fly.io",
+        "database": "Supabase"
+      },
+      "testing": {
+        "unit": "Jest",
+        "e2e": "Playwright"
+      }
+    }
+  },
+  "architecture": {
+    "style": "Clean Architecture with DDD",
+    "layers": ["domain", "application", "infrastructure", "presentation"],
+    "patterns": ["Domain-Driven Design", "Modular Monolith", "tRPC for type-safe APIs"]
+  },
+  "conventions": {
+    "code": {
+      "language": "TypeScript",
+      "style": {
+        "useSemicolons": false,
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    },
+    "database": {
+      "orm": "Prisma",
+      "schemaLocation": "/prisma/schema.prisma",
+      "migrations": "Prisma Migrate"
+    },
+    "frontend": {
+      "styling": "Tailwind CSS with shadcn/ui",
+      "stateManagement": "React Query with tRPC",
+      "formHandling": "React Hook Form with Zod validation"
+    },
+    "auth": {
+      "provider": "Clerk",
+      "integration": "Next.js"
+    }
+  },
+  "development": {
+    "testing": {
+      "unitTests": {
+        "framework": "Jest",
+        "location": "__tests__/",
+        "coverage": 80
+      },
+      "e2e": {
+        "framework": "Playwright",
+        "location": "e2e/"
+      }
+    },
+    "documentation": {
+      "api": "OpenAPI/Swagger",
+      "developerPortal": "Docusaurus",
+      "architecture": "Maintained in README.md and /docs"
+    },
+    "environment": {
+      "configuration": ".env files",
+      "secrets": "Environment variables",
+      "documentation": ".env.example"
+    }
+  },
+  "deployment": {
+    "frontend": {
+      "provider": "Vercel",
+      "environment": ["production", "preview", "development"]
+    },
+    "backend": {
+      "provider": "Fly.io",
+      "environment": ["production", "staging"]
+    },
+    "database": {
+      "provider": "Supabase",
+      "migrations": "Prisma Migrate"
+    }
+  },
+  "quality": {
+    "linting": {
+      "enabled": true,
+      "tools": ["ESLint", "Prettier"]
+    },
+    "typeChecking": "TypeScript",
+    "formatting": {
+      "enabled": true,
+      "tools": ["Prettier"]
+    },
+    "security": {
+      "dependencies": "Regular audits with `pnpm audit` or similar",
+      "secrets": "Pre-commit hooks to prevent secrets being committed"
+    }
+  },
+  "ci": {
+    "githubActions": {
+      "workflows": ["ci.yml"],
+      "environments": ["test", "staging", "production"]
+    },
+    "testing": {
+      "unitTests": true,
+      "e2eTests": true,
+      "typeChecking": true,
+      "linting": true
+    }
+  },
+  "monitoring": {
+    "logging": "Structured logging with Pino",
+    "errorTracking": "Sentry",
+    "analytics": "PostHog"
+  },
+  "featureFlags": {
+    "implementation": "Database-backed model via AdminJS",
+    "caching": "In-memory caching supported",
+    "overrides": "Per-user/tenant overrides supported"
+  },
+  "ide": {
+    "mcpServers": {
+      "nx-mcp": {
+        "url": "http://localhost:9262/sse",
+        "description": "Nx workspace intelligence server for project graph and task execution"
+      }
+    },
+    "nx": {
+      "enabled": true,
+      "autoStartMpc": true
+    }
+  }
+}

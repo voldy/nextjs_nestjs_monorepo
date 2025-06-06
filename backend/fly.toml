@@ -1,0 +1,67 @@
+# fly.toml app configuration file generated for your-app-name on 2025-01-25T17:48:25Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+
+app = "scalier-backend"  # Replace with your actual app name
+primary_region = "fra"  # Washington D.C. - change to your preferred region
+
+[build]
+  dockerfile = "Dockerfile"
+  build-target = "runner"
+
+[env]
+  NODE_ENV = "production"
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/health"
+
+[machines]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512
+
+[[machines.services]]
+  protocol = "tcp"
+  internal_port = 8080
+
+[[machines.services.ports]]
+  port = 80
+  handlers = ["http"]
+  force_https = true
+
+[[machines.services.ports]]
+  port = 443
+  handlers = ["tls", "http"]
+
+[machines.restart]
+  policy = "on-failure"
+
+# Database and other secrets will be set via fly secrets
+
+# Required secrets (set via flyctl secrets set):
+# - DATABASE_URL: Production database connection string
+# - CLERK_SECRET_KEY: Clerk authentication secret key
+# - CORS_ORIGINS: Comma-separated list of allowed frontend domains
+#   Example: "https://yourdomain.com,https://www.yourdomain.com"
+
+# Optional secrets for rate limiting (set via flyctl secrets set):
+# - RATE_LIMIT_MAX: Max requests per time window
+#   Default: 100 (production), 1000 (development)
+#   Example: flyctl secrets set RATE_LIMIT_MAX="100"
+# 
+# - RATE_LIMIT_WINDOW_MS: Time window in milliseconds  
+#   Default: 900000 (15 minutes)
+#   Example: flyctl secrets set RATE_LIMIT_WINDOW_MS="900000" 

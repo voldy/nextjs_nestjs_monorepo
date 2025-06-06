@@ -95,7 +95,7 @@ export const createFixture = {
   }),
   // Convenience methods for common scenarios
   healthCheckWithMemory: (used: number, total: number) => factories.healthCheck.withCustomMemory(used, total),
-  healthCheckProduction: () => factories.healthCheck.production(),
+  healthCheckProduction: () => factories.healthCheck.success(),
   pingWithDelay: (delay: number) => factories.ping.success(delay),
 }
 
@@ -104,7 +104,7 @@ export const scenarios = {
   healthCheck: {
     loading: () => createUseApiMock('loading'),
     success: () => createUseApiMock('success', factories.healthCheck.success()),
-    production: () => createUseApiMock('success', factories.healthCheck.production()),
+    production: () => createUseApiMock('success', factories.healthCheck.success()),
     customMemory: (used: number, total: number) =>
       createUseApiMock('success', factories.healthCheck.withCustomMemory(used, total)),
     error: (message = 'Health check failed') => createUseApiMock('error', undefined, message),

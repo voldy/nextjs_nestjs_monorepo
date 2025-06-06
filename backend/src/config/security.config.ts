@@ -4,12 +4,19 @@ import { BackendEnv } from '../env.ts'
 
 export async function configureSecurity(app: NestFastifyApplication) {
   // Register CORS
+  const corsOrigins =
+    BackendEnv.NODE_ENV === 'production'
+      ? BackendEnv.CORS_ORIGINS_ARRAY.length > 0
+        ? BackendEnv.CORS_ORIGINS_ARRAY
+        : [] // No origins allowed if not configured in production
+      : [
+          'http://localhost:4200', // Next.js frontend (development)
+          'http://localhost:4201', // Next.js frontend (e2e testing)
+          /^http:\/\/localhost:\d+$/, // Any localhost port for development
+        ]
+
   await app.register(fastifyCors, {
-    origin: [
-      'http://localhost:4200', // Next.js frontend (development)
-      'http://localhost:4201', // Next.js frontend (e2e testing)
-      /^http:\/\/localhost:\d+$/, // Any localhost port for development
-    ],
+    origin: corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   })

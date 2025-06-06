@@ -35,7 +35,16 @@
     "next-env.d.ts",
     "../dist/frontend/.next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "src/test-utils",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/__tests__/**",
+    "**/__mocks__/**"
+  ],
   "references": [
     {
       "path": "../packages/shared"

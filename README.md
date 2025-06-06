@@ -443,7 +443,11 @@ NEXT_PUBLIC_DEBUG=false
 # Backend environment (.env or deployment config)
 DATABASE_URL=postgresql://user:pass@localhost:5432/db
 PORT=3000
-CORS_ORIGINS=https://yourdomain.com,https://app.yourdomain.com
+
+# CORS Configuration for Production
+# For local development, CORS is automatically configured for localhost
+# For production, set CORS_ORIGINS with comma-separated domains:
+CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com,https://app.yourdomain.com
 
 # Shared environment (automatically detected)
 NODE_ENV=production
@@ -451,30 +455,54 @@ NODE_ENV=production
 
 ---
 
-## 📦 Adding Dependencies
+## 🚀 **Deployment**
 
-```bash
-# Add to root (workspace tools)
-pnpm add -w <package>
+This monorepo is configured for seamless deployment using CI/CD:
 
-# Add to specific project
-pnpm add <package> --filter frontend
-pnpm add <package> --filter backend
-```
+- **Frontend**: Deployed to **Vercel**
+- **Backend**: Deployed to **Fly.io**
+- **Database**: **Supabase** (PostgreSQL)
+- **CI/CD**: **GitHub Actions**
 
----
+### Quick Deployment
 
-## 🎨 UI Components (Frontend)
+1. **Configure GitHub Secrets** (one-time setup):
 
-The frontend uses [shadcn/ui](https://ui.shadcn.com/docs) for reusable, accessible UI components.
+   ```
+   FLY_API_TOKEN          # From flyctl auth token
+   PRODUCTION_DATABASE_URL # Your production PostgreSQL URL
+   VERCEL_TOKEN           # From Vercel account settings
+   VERCEL_ORG_ID          # From Vercel project settings
+   VERCEL_PROJECT_ID      # From Vercel project settings
+   ```
 
-```bash
-# Add a new component
-pnpm shadcn add button
-pnpm shadcn add card
-```
+2. **Configure Runtime Secrets**:
 
-Components are automatically installed to `frontend/src/components/ui/`.
+   ```bash
+   # Fly.io backend secrets
+   flyctl secrets set DATABASE_URL="..."
+   flyctl secrets set CLERK_SECRET_KEY="..."
+   flyctl secrets set CORS_ORIGINS="https://yourdomain.com"
+
+   # Vercel frontend environment variables (in dashboard)
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_live_..."
+   NEXT_PUBLIC_BACKEND_URL="https://your-app.fly.dev"
+   ```
+
+3. **Deploy automatically**:
+   ```bash
+   git push origin main
+   ```
+
+The CI/CD pipeline will automatically:
+
+- ✅ Run tests and linting
+- ✅ Build applications
+- ✅ Run database migrations
+- ✅ Deploy backend to Fly.io
+- ✅ Deploy frontend to Vercel
+
+**📖 For detailed setup instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ---
 
