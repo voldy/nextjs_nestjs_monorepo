@@ -1,8 +1,9 @@
 module.exports = {
-  preset: 'ts-jest/presets/default-esm',
+  preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  roots: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  moduleDirectories: ['node_modules', '<rootDir>/node_modules', '<rootDir>/../node_modules'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@shared$': '<rootDir>/../packages/shared/src/index.ts',
@@ -34,18 +35,16 @@ module.exports = {
     '^.+\\.(t|j)sx?$': [
       'ts-jest',
       {
-        useESM: true,
         tsconfig: {
-          module: 'ESNext',
-          moduleResolution: 'Node16',
-          target: 'ES2022',
-          allowSyntheticDefaultImports: true,
-          esModuleInterop: true,
           jsx: 'react-jsx',
         },
       },
     ],
   },
-  transformIgnorePatterns: ['node_modules/(?!(.pnpm/)?(@trpc|@tanstack|@testing-library|superjson))'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(.pnpm/)?(@trpc|@tanstack|@testing-library|@radix-ui|@monorepo|superjson))',
+    '!<rootDir>/../packages/shared',
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  resolver: undefined,
 }

@@ -8,10 +8,10 @@
   "type": "module",
   "dependencies": {
     "@clerk/backend": "^1.33.0",
-    "@prisma/client": "^6.8.2",
+    "@prisma/client": "^6.9.0",
     "@trpc/server": "^11.0.0-rc.553",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
-    "prisma": "^6.8.2"
+    "prisma": "^6.9.0"
   }
 }

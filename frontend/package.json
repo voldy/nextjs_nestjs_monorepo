@@ -7,7 +7,7 @@
     "build": "nx build frontend",
     "start": "nx serve frontend --prod",
     "lint": "nx lint frontend",
-    "test": "jest"
+    "test": "pnpm exec jest"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.20.0",
